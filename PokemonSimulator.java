@@ -13,10 +13,10 @@ public class PokemonSimulator {
         // TODO code application logic here
     }
     
-public static void Moveset(int pokeslot1, int pokeslot2, int pokemon1[][], int pokemon2[][],double speed, int accuracy1, int accuracy2){
+public static void Moveset(int move, int pokeslot1, int pokeslot2, int pokemon1[][], int pokemon2[][],double speed, int accuracy1, int accuracy2){
     String [][] skill= new String [3][4];
     double dmg;
-    switch(skill[pokeslot1][pokeslot1])
+    switch(skill[pokeslot1][move])
     {
         case "Take Down":        dmg=damage(85-accuracy1,pokemon1[pokeslot1][0],90,pokemon2[pokeslot2][1],0);
                                 pokemon2[pokeslot2][2]-=dmg;
