@@ -61,8 +61,6 @@ public static void Moveset(int move, int pokeslot1, int pokeslot2, int pokemon1[
                                 pokemon2[pokeslot2][2]-=dmg;
                                 pokemon1[pokeslot1][2]+=dmg/2;
                                 break;
-        case "Dragon Claw":     dmg=damage(100-accuracy1,pokemon1[pokeslot1][0],80,pokemon2[pokeslot2][1],0);
-                                pokemon2[pokeslot2][2]-=dmg;
         
         
     }
