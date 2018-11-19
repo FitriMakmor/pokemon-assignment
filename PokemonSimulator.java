@@ -2,7 +2,7 @@ package pokemon.simulator;
 
 /**
  *
- * @author Fitri
+ * @author Jinghong
  */
 public class PokemonSimulator {
 
@@ -13,16 +13,16 @@ public class PokemonSimulator {
         // TODO code application logic here
     }
     
-public static void Moveset(int move, int pokeslot1, int pokeslot2, int pokemon1[][], int pokemon2[][],double speed, int accuracy1, int accuracy2){
+public static void damage(int finaldamage, int pokeslot1, int pokeslot2, int pokemon1[][], int pokemon2[][],double speed, int accuracy1, int accuracy2){
     String [][] skill= new String [3][4];
     double dmg;
     switch(skill[pokeslot1][move])
     {
-        case "Take Down":        dmg=damage(85-accuracy1,pokemon1[pokeslot1][0],90,pokemon2[pokeslot2][1],0);
+        case "Take Down":       dmg=damage(85-accuracy1,pokemon1[pokeslot1][0],90,pokemon2[pokeslot2][1],0);
                                 pokemon2[pokeslot2][2]-=dmg;
                                 pokemon1[pokeslot1][2]-=dmg/4;
                                 break;
-        case "Quick Attack":     speed+=50;
+        case "Quick Attack":    speed+=50;
                                 dmg=damage(100-accuracy1,pokemon1[pokeslot1][0],40,pokemon2[pokeslot2][1],0);
                                 pokemon2[pokeslot2][2]-=dmg;
                                 break;
@@ -61,8 +61,7 @@ public static void Moveset(int move, int pokeslot1, int pokeslot2, int pokemon1[
                                 pokemon2[pokeslot2][2]-=dmg;
                                 pokemon1[pokeslot1][2]+=dmg/2;
                                 break;
-        case "Dragon Claw":     dmg=damage(100-accuracy1,pokemon1[pokeslot1][0],80,pokemon2[pokeslot2][1],0);
-                                pokemon2[pokeslot2][2]-=dmg;
+        
         
         
     }
