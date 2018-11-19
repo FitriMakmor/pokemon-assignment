@@ -51,6 +51,19 @@ public static void Moveset(int move, int pokeslot1, int pokeslot2, int pokemon1[
                                 break;
         case "Agility":         pokemon1[pokeslot1][3]+=15;
                                 break;
+        case "Leaf Storm":      dmg=damage(90-accuracy1,pokemon1[pokeslot1][0],130,pokemon2[pokeslot2][1],1);
+                                pokemon2[pokeslot2][2]-=dmg;//Actually lowers enemy sp. attack
+                                break;
+        case "Leaf Blade":      dmg=damage(100-accuracy1,pokemon1[pokeslot1][0],90,pokemon2[pokeslot2][1],1);
+                                pokemon2[pokeslot2][2]-=dmg;//Actually increases critical hit chance
+                                break;
+        case "Giga Drain":      dmg=damage(100-accuracy1,pokemon1[pokeslot1][0],75,pokemon2[pokeslot2][1],1);
+                                pokemon2[pokeslot2][2]-=dmg;
+                                pokemon1[pokeslot1][2]+=dmg/2;
+                                break;
+        case "Dragon Claw":     dmg=damage(100-accuracy1,pokemon1[pokeslot1][0],80,pokemon2[pokeslot2][1],0);
+                                pokemon2[pokeslot2][2]-=dmg;
+        
         
     }
     }
