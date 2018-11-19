@@ -13,8 +13,75 @@ public class PokemonSimulator {
         // TODO code application logic here
     }
     
-public static void damage(int finaldamage, int pokeslot1, int pokeslot2, int pokemon1[][], int pokemon2[][],double speed, int accuracy1, int accuracy2){
-    String [][] skill= new String [3][4];
+public static void damage(int finaldamage,int accuracy,int attack,int power,int defense,int type_enemy,int type)//defense of enemy{
+   
+    
+   finaldamage=((attack*power/defence)/20)+2 ;
+           
+       if (type_enemy==0 && type==1) //normal attack fire
+            finaldamage=((attack*power/defence)/20)+2;
+       
+       else if (type_enemy==0 && type==2) //normal attack grass
+            finaldamage=((attack*power/defence)/20)+2;
+       
+        else if (type_enemy==0 && type==3) //normal attack water
+            finaldamage=((attack*power/defence)/20)+2;
+           
+       else if (type_enemy==0 && type==0) //normal attack normal
+            finaldamage=((attack*power/defence)/20)+2;
+    
+       else if (type_enemy==0 && type==3) //normal attack water
+            finaldamage=((attack*power/defence)/20)+2;
+    
+      else if (type_enemy==1 && type==0) //fire attack normal
+            finaldamage=((attack*power/defence)/20)+2;
+    
+      else if (type_enemy==1&& type==1) //fire attack fire
+            finaldamage=(((attack*power/defence)/20)+2)/2;
+    
+       else if (type_enemy==1 && type==2) //fire attack grass
+            finaldamage=(((attack*power/defence)/20)+2)*2;
+    
+      else if (type_enemy==1 && type==3) //fire attack water
+            finaldamage=(((attack*power/defence)/20)+2)/2;
+    
+    
+     else if (type_enemy==2 && type==0) //grass attack normal
+         finaldamage=(((attack*power/defence)/20)+2);
+    
+    
+    else if (type_enemy==2 && type==1) //grass attack fire
+            finaldamage=(((attack*power/defence)/20)+2)/2;
+    
+      else if (type_enemy==2 && type==2) //grass attack grass
+            finaldamage=(((attack*power/defence)/20)+2)/2;
+    
+      else if (type_enemy==2 && type==3) //grass attack water
+            finaldamage=(((attack*power/defence)/20)+2)*2;
+    
+      else if (type_enemy==3 && type==0) //water attack normal
+            finaldamage=(((attack*power/defence)/20)+2);
+    
+    else if (type_enemy==3 && type==1) //water attack fire
+            finaldamage=(((attack*power/defence)/20)+2)*2;
+    
+      else if (type_enemy==3 && type==1) //water attack fire
+            finaldamage=(((attack*power/defence)/20)+2)*2;
+    
+      else if (type_enemy==3 && type==2) //water attack grass
+            finaldamage=(((attack*power/defence)/20)+2)/2;
+    
+    else
+        finaldamage=(((attack*power/defebce)/20+2)/2;
+                     
+                     
+    // String [][] skill= new String [3][4];
+    
+    
+    
+    
+    
+    /*
     double dmg;
     switch(skill[pokeslot1][move])
     {
@@ -65,5 +132,7 @@ public static void damage(int finaldamage, int pokeslot1, int pokeslot2, int pok
         
         
     }
+    */
+    
     }
 }
