@@ -12,7 +12,8 @@ public class PokemonSimulator {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        String
+        Scanner s=new Scanner(System.in);
+        String name;
         System.out.println("\n\n\n\n\n\t\t");
         
         System.out.println("Hi Trainer, Welcome to Pokemon World!");
@@ -20,4 +21,7 @@ public class PokemonSimulator {
         System.out.println("What should I call you ? ");
         
         name=s.nextLine();
+        
+         System.out.println("Hi " name " ! Good to see you.Are you ready ")
+         
     }
