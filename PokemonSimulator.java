@@ -12,7 +12,12 @@ public class PokemonSimulator {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        do{
+            pokeslot1=select;
+            if (player1stats[pokeslot1][2]<0)
+                    System.out.println("That pokemon has fainted, choose another pokemon!");
+            else break;
+            }while(true);
     }
 public static void Moveset(int move, int pokeslot1, int pokeslot2, double[][] player1stats, double[][] player2stats, double[] speed, double[] accuracy, int[] weather, boolean[] state1,boolean[] state2){
     String [][] skill= new String [3][4];
@@ -214,5 +219,5 @@ public static void rage(boolean[] state2, double player2stats[][],int pokeslot2)
         player2stats[pokeslot2][0]+=10;
         System.out.println("Totodile's rage is building!");
     }
-    }
+}
 }
