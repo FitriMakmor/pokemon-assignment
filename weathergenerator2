@@ -1,0 +1,31 @@
+import java.util.Scanner;
+import java.util.Random;
+ public class PokemonStatsArrays {
+     public static void main(String []args) {
+        int move; //skills (0,1,2,3)
+        int pokeslot1; //which pokemon (pokemon 0,1,2)
+        int pokeslot2;
+        double player1stats[][]= new double [3][5];
+        double player2stats[][]= new double [3][5];
+        double speed1=0;
+        double speed2=0;
+        double accuracy1;
+        double accuracy2;
+        int weather; //weather (raining, sunny, nice)
+        boolean state[]=new boolean [1];
+        state[0]=false;
+        
+        //assigning the skills
+        
+        //weather generator
+        Random WeatherGenerator = new Random();
+        weather = WeatherGenerator.nextInt(3); //0=nice day, neutral, 1=sunny day, 2=rainy day
+        switch (weather){
+            case 0: System.out.println("What a nice day, perfect for a Pokemon battle!");
+            break;
+            case 1: System.out.println("It's a sunny day! With this weather, keep yourselves hydrated.");
+            break;
+            default: System.out.println("It's raining! Get shelter or you'll be soaking wet!");
+        }
+    }
+ }
