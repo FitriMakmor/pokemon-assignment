@@ -1,6 +1,7 @@
-package PokemonSimulator;
+package pokemonsimulator;
 
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  *
@@ -12,12 +13,42 @@ public class PokemonSimulator {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        Random r = new Random();
+        Scanner input = new Scanner(System.in);
+        int move; //skills (0,1,2,3)
+        int pokeslot1; //which pokemon (pokemon 0,1,2)
+        int pokeslot2;
+        double player1stats[][]= new double [3][5];
+        double player2stats[][]= new double [3][5];
+        double speed1=0;
+        double speed2=0;
+        double accuracy1;
+        double accuracy2;
+        int weather; //weather (raining, sunny, nice)
+        boolean state1[]={false,false,false}; //0-solarbeam,1-skullbash,2-rage
+        boolean state2[]={false,false,false}; 
+        //assigning the skills
+        
+        //weather generator
+        weather = r.nextInt(3); //0=nice day, neutral, 1=sunny day, 2=rainy day
+        switch (weather){
+            case 0: System.out.println("What a nice day, perfect for a Pokemon battle!");
+            break;
+            case 1: System.out.println("It's a sunny day! With this weather, keep yourselves hydrated.");
+            break;
+            default: System.out.println("It's raining! Get shelter or you'll be soaking wet!");
+        }
+        
+        //switching pokemons
+        System.out.println("Which Pokemon would you like to switch to?");
+        int select=input.nextInt();
         do{
             pokeslot1=select;
             if (player1stats[pokeslot1][2]<0)
                     System.out.println("That pokemon has fainted, choose another pokemon!");
             else break;
             }while(true);
+        System.out.println("You have chosen ...");//to be changed
     }
 public static void Moveset(int move, int pokeslot1, int pokeslot2, double[][] player1stats, double[][] player2stats, double[] speed, double[] accuracy, int[] weather, boolean[] state1,boolean[] state2){
     String [][] skill= new String [3][4];
@@ -37,13 +68,13 @@ public static void Moveset(int move, int pokeslot1, int pokeslot2, double[][] pl
     state1[2]=false;//removes rage
     switch(skill[pokeslot1][move])
     {
-        case "Take Down":       dmg=damage(85-accuracy[0],player1stats[pokeslot1][0],90,player2stats[pokeslot2][1],0);
+        case "Take Down":       dmg=damage(85-accuracy[0],player1stats[pokeslot1][0],90,player2stats[pokeslot2][1],player2stats[pokeslot2][4],0);
                                 player2stats[pokeslot2][2]-=dmg;
                                 player1stats[pokeslot1][2]-=dmg/4;
                                 rage(state2,player2stats,pokeslot2);
                                 break;
         case "Quick Attack":    speed[0]+=50;//If possible speed is applied before attack phase
-                                dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],40,player2stats[pokeslot2][1],0);
+                                dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],40,player2stats[pokeslot2][1],player2stats[pokeslot2][4],0);
                                 player2stats[pokeslot2][2]-=dmg;
                                 rage(state2,player2stats,pokeslot2);
                                 break;
@@ -54,11 +85,11 @@ public static void Moveset(int move, int pokeslot1, int pokeslot2, double[][] pl
         case "Flash":           accuracy[1]-=15;
                                 break;
         case "Hyper Beam":      speed[1]-=100;
-                                dmg=damage(90-accuracy[0],player1stats[pokeslot1][0],150,player2stats[pokeslot2][1],0);
+                                dmg=damage(90-accuracy[0],player1stats[pokeslot1][0],150,player2stats[pokeslot2][1],player2stats[pokeslot2][4],0);
                                 player2stats[pokeslot2][2]-=dmg;
                                 rage(state2,player2stats,pokeslot2);
                                 break;
-        case "Mega Punch":      dmg=damage(85-accuracy[0],player1stats[pokeslot1][0],80,player2stats[pokeslot2][1],0);
+        case "Mega Punch":      dmg=damage(85-accuracy[0],player1stats[pokeslot1][0],80,player2stats[pokeslot2][1],player2stats[pokeslot2][4],0);
                                 player2stats[pokeslot2][2]-=dmg;
                                 rage(state2,player2stats,pokeslot2);
                                 break;
@@ -67,7 +98,7 @@ public static void Moveset(int move, int pokeslot1, int pokeslot2, double[][] pl
                                 break;
         case "Harden":          player1stats[pokeslot1][1]+=15;
                                 break;
-        case "Tackle":          dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],40,player2stats[pokeslot2][1],0);
+        case "Tackle":          dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],40,player2stats[pokeslot2][1],player2stats[pokeslot2][4],0);
                                 player2stats[pokeslot2][2]-=dmg;
                                 rage(state2,player2stats,pokeslot2);
                                 break;
@@ -75,29 +106,29 @@ public static void Moveset(int move, int pokeslot1, int pokeslot2, double[][] pl
                                 break;
         case "Agility":         player1stats[pokeslot1][3]+=15;
                                 break;
-        case "Leaf Storm":      dmg=damage(90-accuracy[0],player1stats[pokeslot1][0],130,player2stats[pokeslot2][1],1);
+        case "Leaf Storm":      dmg=damage(90-accuracy[0],player1stats[pokeslot1][0],130,player2stats[pokeslot2][1],player2stats[pokeslot2][4],1);
                                 player2stats[pokeslot2][2]-=dmg;//Actually lowers enemy sp. attack
                                 rage(state2,player2stats,pokeslot2);
                                 break;
-        case "Leaf Blade":      dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],90,player2stats[pokeslot2][1],1);
+        case "Leaf Blade":      dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],90,player2stats[pokeslot2][1],player2stats[pokeslot2][4],1);
                                 player2stats[pokeslot2][2]-=dmg;//Actually increases critical hit chance
                                 rage(state2,player2stats,pokeslot2);
                                 break;
-        case "Giga Drain":      dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],75,player2stats[pokeslot2][1],1);
+        case "Giga Drain":      dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],75,player2stats[pokeslot2][1],player2stats[pokeslot2][4],1);
                                 player2stats[pokeslot2][2]-=dmg;
                                 player1stats[pokeslot1][2]+=dmg/2;
                                 rage(state2,player2stats,pokeslot2);
                                 break;
-        case "Absorb":          dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],20,player2stats[pokeslot2][1],1);
+        case "Absorb":          dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],20,player2stats[pokeslot2][1],player2stats[pokeslot2][4],1);
                                 player2stats[pokeslot2][2]-=dmg;
                                 player1stats[pokeslot1][2]+=dmg;//Doubled healing for balancing purposes
                                 rage(state2,player2stats,pokeslot2);
                                 break;
-        case "Razor Leaf":      dmg=damage(95-accuracy[0],player1stats[pokeslot1][0],55,player2stats[pokeslot2][1],1);
+        case "Razor Leaf":      dmg=damage(95-accuracy[0],player1stats[pokeslot1][0],55,player2stats[pokeslot2][1],player2stats[pokeslot2][4],1);
                                 player2stats[pokeslot2][2]-=dmg;//Actually increases critical hit chance
                                 rage(state2,player2stats,pokeslot2);
                                 break;
-        case "Bite":            dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],60,player2stats[pokeslot2][1],0);
+        case "Bite":            dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],60,player2stats[pokeslot2][1],player2stats[pokeslot2][4],0);
                                 player2stats[pokeslot2][2]-=dmg;
                                 rage(state2,player2stats,pokeslot2);
                                 double flinch = r.nextInt(10001);
@@ -105,7 +136,7 @@ public static void Moveset(int move, int pokeslot1, int pokeslot2, double[][] pl
                                 if(flinch>=70)
                                     speed[1]-=100;
                                 break;
-        case "Magical Leaf":    dmg=damage(100,player1stats[pokeslot1][0],60,player2stats[pokeslot2][1],1);
+        case "Magical Leaf":    dmg=damage(100,player1stats[pokeslot1][0],60,player2stats[pokeslot2][1],player2stats[pokeslot2][4],1);
                                 player2stats[pokeslot2][2]-=dmg;//Sure hit move unless airborne, underground etc.
                                 rage(state2,player2stats,pokeslot2);
                                 break;
@@ -114,7 +145,7 @@ public static void Moveset(int move, int pokeslot1, int pokeslot2, double[][] pl
                                 break;
         case "Solar Beam":      if(state1[0]==true)
                                 {
-                                    dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],120,player2stats[pokeslot2][1],1);
+                                    dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],120,player2stats[pokeslot2][1],player2stats[pokeslot2][4],1);
                                     player2stats[pokeslot2][2]-=dmg;//Executes in one turn when sunny, else two turns.
                                     rage(state2,player2stats,pokeslot2);
                                     skill[pokeslot1][move]=temp;
@@ -122,17 +153,17 @@ public static void Moveset(int move, int pokeslot1, int pokeslot2, double[][] pl
                                     state1[0]=false;
                                 }
                                 else if (weather[0]==0){
-                                    dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],120,player2stats[pokeslot2][1],1);
+                                    dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],120,player2stats[pokeslot2][1],player2stats[pokeslot2][4],1);
                                     player2stats[pokeslot2][2]-=dmg;//Executes in one turn when sunny, else two turns.
                                     rage(state2,player2stats,pokeslot2);
                                 }
                                 else state1[0]=true;
                                 break;
-        case "Seed Bomb":       dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],80,player2stats[pokeslot2][1],1);
+        case "Seed Bomb":       dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],80,player2stats[pokeslot2][1],player2stats[pokeslot2][4],1);
                                 player2stats[pokeslot2][2]-=dmg;
                                 rage(state2,player2stats,pokeslot2);
                                 break;
-        case "Leaf Tornado":    dmg=damage(90-accuracy[0],player1stats[pokeslot1][0],65,player2stats[pokeslot2][1],1);
+        case "Leaf Tornado":    dmg=damage(90-accuracy[0],player1stats[pokeslot1][0],65,player2stats[pokeslot2][1],player2stats[pokeslot2][4],1);
                                 player2stats[pokeslot2][2]-=dmg;
                                 rage(state2,player2stats,pokeslot2);
                                 double debuffacc=r.nextInt(10001);
@@ -143,38 +174,38 @@ public static void Moveset(int move, int pokeslot1, int pokeslot2, double[][] pl
                                 break;
         case "Growth":          player1stats[pokeslot1][0]+=20;//Actually increases sp.attack as well
                                 break;
-        case "Ember":           dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],40,player2stats[pokeslot2][1],3);
+        case "Ember":           dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],40,player2stats[pokeslot2][1],player2stats[pokeslot2][4],3);
                                 player2stats[pokeslot2][2]-=dmg;
                                 rage(state2,player2stats,pokeslot2);
                                 break;
-        case "Flare Blitz":     dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],120,player2stats[pokeslot2][1],3);
+        case "Flare Blitz":     dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],120,player2stats[pokeslot2][1],player2stats[pokeslot2][4],3);
                                 player2stats[pokeslot2][2]-=dmg;
                                 player1stats[pokeslot1][2]-=dmg/3;//Actually has a 10% chance of burning target
                                 rage(state2,player2stats,pokeslot2);
                                 break;
-        case "Scratch":         dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],40,player2stats[pokeslot2][1],0);
+        case "Scratch":         dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],40,player2stats[pokeslot2][1],player2stats[pokeslot2][4],0);
                                 player2stats[pokeslot2][2]-=dmg;
                                 rage(state2,player2stats,pokeslot2);
                                 break;
-        case "Slash":           dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],70,player2stats[pokeslot2][1],0);
+        case "Slash":           dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],70,player2stats[pokeslot2][1],player2stats[pokeslot2][4],0);
                                 player2stats[pokeslot2][2]-=dmg;//Actually increases critical hit chance
                                 rage(state2,player2stats,pokeslot2);
                                 break;
-        case "Double-Edge":     dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],120,player2stats[pokeslot2][1],0);
+        case "Double-Edge":     dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],120,player2stats[pokeslot2][1],player2stats[pokeslot2][4],0);
                                 player2stats[pokeslot2][2]-=dmg;
                                 player1stats[pokeslot1][2]-=dmg/3;
                                 rage(state2,player2stats,pokeslot2);
                                 break;
-        case "Blaze Kick":      dmg=damage(90-accuracy[0],player1stats[pokeslot1][0],85,player2stats[pokeslot2][1],3);
+        case "Blaze Kick":      dmg=damage(90-accuracy[0],player1stats[pokeslot1][0],85,player2stats[pokeslot2][1],player2stats[pokeslot2][4],3);
                                 player2stats[pokeslot2][2]-=dmg;//Actually has a 10% chance of burning target
                                 rage(state2,player2stats,pokeslot2);
                                 break;
-        case "Flame Charge":    dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],50,player2stats[pokeslot2][1],3);
+        case "Flame Charge":    dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],50,player2stats[pokeslot2][1],player2stats[pokeslot2][4],3);
                                 player2stats[pokeslot2][2]-=dmg;
                                 rage(state2,player2stats,pokeslot2);
                                 player1stats[pokeslot1][3]+=15;
                                 break;
-        case "Bubble Beam":     dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],65,player2stats[pokeslot2][1],2);
+        case "Bubble Beam":     dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],65,player2stats[pokeslot2][1],player2stats[pokeslot2][4],2);
                                 player2stats[pokeslot2][2]-=dmg;
                                 rage(state2,player2stats,pokeslot2);
                                 double debuffspd=r.nextInt(10001);
@@ -183,13 +214,13 @@ public static void Moveset(int move, int pokeslot1, int pokeslot2, double[][] pl
                                     player2stats[pokeslot2][3]-=10;
                                     System.out.println("Enemy's speed lowered!");}
                                 break;
-        case "Water Gun":       dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],40,player2stats[pokeslot2][1],2);
+        case "Water Gun":       dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],40,player2stats[pokeslot2][1],player2stats[pokeslot2][4],2);
                                 player2stats[pokeslot2][2]-=dmg;
                                 rage(state2,player2stats,pokeslot2);
                                 break;
         case "Skull Bash":      if(state1[1]==true)
                                 {
-                                    dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],120,player2stats[pokeslot2][1],1);
+                                    dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],120,player2stats[pokeslot2][1],player2stats[pokeslot2][4],1);
                                     player2stats[pokeslot2][2]-=dmg;//Executes in two turns.
                                     rage(state2,player2stats,pokeslot2);
                                     skill[pokeslot1][move]=temp;
@@ -201,11 +232,11 @@ public static void Moveset(int move, int pokeslot1, int pokeslot2, double[][] pl
                                 state1[1]=true;
                                 }
                                 break;
-        case "Hydro Pump":      dmg=damage(80-accuracy[0],player1stats[pokeslot1][0],110,player2stats[pokeslot2][1],2);
+        case "Hydro Pump":      dmg=damage(80-accuracy[0],player1stats[pokeslot1][0],110,player2stats[pokeslot2][1],player2stats[pokeslot2][4],2);
                                 player2stats[pokeslot2][2]-=dmg;
                                 rage(state2,player2stats,pokeslot2);
                                 break;
-        case "Rage":            dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],20,player2stats[pokeslot2][1],2);
+        case "Rage":            dmg=damage(100-accuracy[0],player1stats[pokeslot1][0],20,player2stats[pokeslot2][1],player2stats[pokeslot2][4],2);
                                 player2stats[pokeslot2][2]-=dmg;
                                 rage(state2,player2stats,pokeslot2);
                                 state1[2]=true;
@@ -219,5 +250,63 @@ public static void rage(boolean[] state2, double player2stats[][],int pokeslot2)
         player2stats[pokeslot2][0]+=10;
         System.out.println("Totodile's rage is building!");
     }
+}
+public static double damage(double accuracy,double attack,double power,double defense,double type_enemy,int type){
+
+       if (type_enemy==0 && type==1) //normal attack fire
+            return((attack*power/defense)/20)+2;
+       
+       else if (type_enemy==0 && type==2) //normal attack grass
+            return((attack*power/defense)/20)+2;
+       
+        else if (type_enemy==0 && type==3) //normal attack water
+            return((attack*power/defense)/20)+2;
+           
+       else if (type_enemy==0 && type==0) //normal attack normal
+            return((attack*power/defense)/20)+2;
+    
+       else if (type_enemy==0 && type==3) //normal attack water
+            return((attack*power/defense)/20)+2;
+    
+      else if (type_enemy==1 && type==0) //fire attack normal
+            return((attack*power/defense)/20)+2;
+    
+      else if (type_enemy==1&& type==1) //fire attack fire
+            return(((attack*power/defense)/20)+2)/2;
+    
+       else if (type_enemy==1 && type==2) //fire attack grass
+            return(((attack*power/defense)/20)+2)*2;
+    
+      else if (type_enemy==1 && type==3) //fire attack water
+            return(((attack*power/defense)/20)+2)/2;
+    
+    
+     else if (type_enemy==2 && type==0) //grass attack normal
+         return(((attack*power/defense)/20)+2);
+    
+    
+    else if (type_enemy==2 && type==1) //grass attack fire
+            return(((attack*power/defense)/20)+2)/2;
+    
+      else if (type_enemy==2 && type==2) //grass attack grass
+            return(((attack*power/defense)/20)+2)/2;
+    
+      else if (type_enemy==2 && type==3) //grass attack water
+            return(((attack*power/defense)/20)+2)*2;
+    
+      else if (type_enemy==3 && type==0) //water attack normal
+            return(((attack*power/defense)/20)+2);
+    
+    else if (type_enemy==3 && type==1) //water attack fire
+            return(((attack*power/defense)/20)+2)*2;
+    
+      else if (type_enemy==3 && type==1) //water attack fire
+            return(((attack*power/defense)/20)+2)*2;
+    
+      else if (type_enemy==3 && type==2) //water attack grass
+            return(((attack*power/defense)/20)+2)/2;
+    
+    else
+        return((attack*power/defense)/20+2)/2;
 }
 }
