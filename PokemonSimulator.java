@@ -69,8 +69,8 @@ public static double damage(double accuracy,double attack,double power,double de
             return(((attack*power/defense)/20)+2)/2;
     
     else
-        return((attack*power/defense)/20+2)/2;               
-                     
+        return((attack*power/defense)/20+2)/2;
+    
     // String [][] skill= new String [3][4];
     
     
