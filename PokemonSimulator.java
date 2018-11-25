@@ -12,7 +12,7 @@ public class PokemonSimulator {
     public static void main(String[] args) {
         // TODO code application logic here
         
-         Scanner s=new Scanner(System.in);
+        Scanner s=new Scanner(System.in);
         String name;
         System.out.println("\n\t\t");
         
@@ -22,7 +22,10 @@ public class PokemonSimulator {
         
         name=s.nextLine();
         
-         System.out.print("Hi " +name);
-         System.out.print("! Good to see you.Are you ready ");
+        System.out.print("Hi " +name);
+        System.out.print("! Good to see you!");
+        System.out.println("Your very own adventure is about to unfold. Are you ready?");
+        System.out.println("Now, I'll let you to choose your very first pokemon!");
          
+        System.out.println("You have ");
     }
