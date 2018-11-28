@@ -59,15 +59,20 @@ public static void Moveset(int move, int pokeslot1, int pokeslot2, double[][] pl
     double confused;
     Random r = new Random ();
     String temp;
-    if (state1[0]==true);//solarbeam
+    if (state1[0]==true)//solarbeam
     {
         temp=skill[pokeslot1][move];
         skill[pokeslot1][move]="Solar Beam";
     }
-    if (state1[1]==true);//skullbash
+    if (state1[1]==true)//skullbash
     {
         temp=skill[pokeslot1][move];
         skill[pokeslot1][move]="Skull Bash";
+    }
+    if (state1[4]==true)
+    {
+        player1stats[pokeslot1][2]-=10; //inflicts burn true damage and removes status
+        state1[4]=false;
     }
     state1[2]=false;//removes rage
     switch(skill[pokeslot1][move])
