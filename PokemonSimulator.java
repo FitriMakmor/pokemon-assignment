@@ -58,7 +58,7 @@ public static void Moveset(int move, int pokeslot1, int pokeslot2, double[][] pl
     double debuffacc;
     double confused;
     Random r = new Random ();
-    String temp;
+    String temp="";
     if (state1[0]==true)//solarbeam
     {
         temp=skill[pokeslot1][move];
