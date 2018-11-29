@@ -31,8 +31,16 @@ public class PokemonSimulator {
                  + "4.EEVEE(NORMAL) 5.SNORLAX(NORMAL) 6.PORYGON(NORMAL) \n7.SCEPTILE(GRASS) 8.GROTLE(GRASS) 9.SNIVY(GRASS)"
                  + "\n10.SQUIRTLE(WATER) 11.TOTODILE(WATER) 12.MUDKIP(WATER)");
    
-   int answer=s.nextInt();
-  switch (answer)
+ int answer=s.nextInt();
+   s.nextLine();
+   while (!(answer>0 && answer<20))
+   {
+       System.out.println("You have enter a wrong number,Please enter again!");
+       answer=s.nextInt();
+       s.nextLine();
+   }
+   
+     switch (answer)
   {
       case(1):
        System.out.println("Okay,so you've chose CHARMANDER as your first pokemon.");
@@ -70,7 +78,33 @@ public class PokemonSimulator {
          case(12):
       System.out.println("Okay,so you've chose MUDKIP as your first pokemon.");
         break;
-    }
-        System.out.println("Would you like to give a nickname for your pokemon?");
+        case(13):
+      System.out.println("Okay,so you've chose BULBASAUR as your first pokemon.");
+        break;
+        case(14):
+      System.out.println("Okay,so you've chose CHIKORITA as your first pokemon.");
+        break;
+        case(15):
+      System.out.println("Okay,so you've chose TURTWIG as your first pokemon.");
+        break;
+        case(16):
+      System.out.println("Okay,so you've chose CHIMCHAR as your first pokemon.");
+        break;
+        case(17):
+      System.out.println("Okay,so you've chose PIPLUP as your first pokemon.");
+        break;
+        case(18):
+      System.out.println("Okay,so you've chose TEPIG as your first pokemon.");
+        break;
+        default:
+      System.out.println("Okay,so you've chose OSHAWOTT as your first pokemon.");
+        break;                
         
+     }
+ 
+      System.out.println("Would you like to give a nickname for your pokemon?");
+        nickname=s.nextLine();
+        System.out.println("You've named it to "+nickname+ " !");
     }
+}
+
