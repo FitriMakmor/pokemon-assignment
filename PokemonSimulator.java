@@ -62,14 +62,45 @@ public static double damage(double accuracy,double attack,double power,double de
     else if (type_enemy==3 && type==1) //water attack fire
             return(((attack*power/defense)/20)+2)*2;
     
-      else if (type_enemy==3 && type==1) //water attack fire
-            return(((attack*power/defense)/20)+2)*2;
+      else if (type_enemy==3 && type==3) //water attack water
+            return(((attack*power/defense)/20)+2)/2;
     
       else if (type_enemy==3 && type==2) //water attack grass
             return(((attack*power/defense)/20)+2)/2;
     
     else
         return((attack*power/defense)/20+2)/2;
+    
+    //0 normal,1 grass,2 water, 3 fire
+    if (type==0)
+        return(attack*power/defense)/20+2;
+    else if(type==1)
+    {
+        if(enemy_type==2)
+            return((attack*power/defense)/20+2)*2;
+        else if(enemy_type==3)
+            return((attack*power/defense)/20+2)/2;
+        else
+            return(attack*power/defense)/20+2;
+    }
+    else if(type==2)
+    {
+        if(enemy_type==3)
+            return((attack*power/defense)/20+2)*2;
+        else if(enemy_type==1)
+            return((attack*power/defense)/20+2)/2;
+        else
+            return(attack*power/defense)/20+2;
+    }
+    else
+    {
+        if(enemy_type==1)
+            return((attack*power/defense)/20+2)*2;
+        else if(enemy_type==2)
+            return((attack*power/defense)/20+2)/2;
+        else
+            return(attack*power/defense)/20+2;
+    }
     
     // String [][] skill= new String [3][4];
     
