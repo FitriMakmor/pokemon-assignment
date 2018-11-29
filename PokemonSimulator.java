@@ -32,16 +32,16 @@ public class PokemonSimulator {
                  + "\n10.SQUIRTLE(WATER) 11.TOTODILE(WATER) 12.MUDKIP(WATER)");
         
 
-        String charmander = "charmander",cyndaquil="cyndaquil",blaziken="blaziken",eevee="eevee";
+      /*  String charmander = "charmander",cyndaquil="cyndaquil",blaziken="blaziken",eevee="eevee";
         String snorlax="snorlax",porygon="porygon",sceptile="sceptile",grotle="grotle";
         String snivy="snivy",squirtle="squirtle",totodile="totodile",mudkip="mudkip";
       
         String answer=s.nextLine();
-        
+        */
         
        
-        while(answer .equals(charmander)||answer.equals(cyndaquil)||answer.equals(blaziken)||answer.equals(eevee)||answer.equals(snorlax)||answer.equals(porygon)||answer.equals(sceptile)||answer.equals(grotle)||answer.equals(snivy)||answer.equals(squirtle)||answer.equals(totodile)||answer.equals(mudkip))
-      {
+   /*     while(answer .equals(charmander)||answer.equals(cyndaquil)||answer.equals(blaziken)||answer.equals(eevee)||answer.equals(snorlax)||answer.equals(porygon)||answer.equals(sceptile)||answer.equals(grotle)||answer.equals(snivy)||answer.equals(squirtle)||answer.equals(totodile)||answer.equals(mudkip))
+    {
         if(answer .equals(charmander))
         {
         System.out.println("Okay,so you've chose "+charmander+ " as your first pokemon.");
@@ -113,7 +113,48 @@ public class PokemonSimulator {
         answer=s.nextLine();
         }
       }
+        */
+   
+   int answer=s.nextInt();
+  switch (answer)
+  {
+      case(1):
+       System.out.println("Okay,so you've chose CHARMANDER as your first pokemon.");
+        break;
+      case(2):
+      System.out.println("Okay,so you've chose CYNDAQUIL as your first pokemon.");
+        break;
+       case(3):
+      System.out.println("Okay,so you've chose BLAZIKEN as your first pokemon.");
+        break;
+         case(4):
+      System.out.println("Okay,so you've chose EEVEEE as your first pokemon.");
+        break;
+         case(5):
+      System.out.println("Okay,so you've chose SNORLAX as your first pokemon.");
+        break;
+         case(6):
+      System.out.println("Okay,so you've chose PORYGON as your first pokemon.");
+        break;
+         case(7):
+      System.out.println("Okay,so you've chose SCEPTILE as your first pokemon.");
+        break;
+         case(8):
+      System.out.println("Okay,so you've chose GROTLE as your first pokemon.");
+        break;
+         case(9):
+      System.out.println("Okay,so you've chose SNIVY as your first pokemon.");
+        break;
+         case(10):
+      System.out.println("Okay,so you've chose SQUIRTLE as your first pokemon.");
+        break;
+         case(11):
+      System.out.println("Okay,so you've chose TOTODILE as your first pokemon.");
+        break;
+         case(12):
+      System.out.println("Okay,so you've chose MUDKIP as your first pokemon.");
+        break;
+    }
+        System.out.println("Would you like to give a nickname for your pokemon?");
         
-          
-
     }
