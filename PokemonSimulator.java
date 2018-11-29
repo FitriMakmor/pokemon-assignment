@@ -13,6 +13,9 @@ import java.io.IOException;
  * @author KaiBin
  */
 public class Pokemon {
+    
+    public static String[] pokemonList;
+    
     /**
      * @param args the command line arguments
      * @throws java.io.IOException
