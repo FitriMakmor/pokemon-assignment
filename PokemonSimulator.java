@@ -43,7 +43,7 @@ public class PokemonSimulator {
         int select=input.nextInt();
         do{
             pokeslot1=select;
-            if (player1stats[pokeslot1][2]<0)
+            if (player1stats[pokeslot1][2]<=0)
                     System.out.println("That pokemon has fainted, choose another pokemon!");
             else break;
             }while(true);
