@@ -101,7 +101,7 @@ public static void Moveset(int move, int pokeslot1, int pokeslot2, double[][] pl
                                 break;
         case "Tail Whip":       player2stats[pokeslot2][1]-=20;
                                 if(player2stats[pokeslot2][1]<0)//Apply this to every stat!
-                                    player2stats[pokeslot2][1]=0;
+                                    player2stats[pokeslot2][1]=0;break;
         case "Sand Attack":
         case "Flash":           accuracy[1]-=15;
                                 break;
