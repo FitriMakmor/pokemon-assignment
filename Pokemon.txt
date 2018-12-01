@@ -136,7 +136,7 @@ normal
 70
 70
 
-Turtwig      
+Turtwig
 grass
 113
 119
@@ -159,7 +159,7 @@ normal
 50
 65
 
-Chimchar       
+Chimchar
 fire
 116
 88
@@ -182,7 +182,7 @@ normal
 70
 70
 
-Piplup    
+Piplup
 water
 111
 109
@@ -228,7 +228,7 @@ grass
 130
 60
 
-Tepig    
+Tepig
 fire
 108
 90
