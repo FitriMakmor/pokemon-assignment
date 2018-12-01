@@ -3,6 +3,11 @@ package pokemonsimulator;
 import java.util.Random;
 import java.util.Scanner;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 /**
  *
  * @author Fitri
@@ -11,7 +16,7 @@ public class PokemonSimulator {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         PokemonGUI g = new PokemonGUI();
         Random r = new Random();
         Scanner input = new Scanner(System.in);
@@ -20,14 +25,79 @@ public class PokemonSimulator {
         int pokeslot2;
         double player1stats[][]= new double [3][5];
         double player2stats[][]= new double [3][5];
+        String pokename1[]=new String[3];
+        String pokename2[]=new String[3];
         double speed1=0;
         double speed2=0;
         double accuracy1;
         double accuracy2;
         int weather; //weather (raining, sunny, nice)
         boolean state1[]={false,false,false,false,false}; //0-solarbeam,1-skullbash,2-rage,3-confused,4-burning
-        boolean state2[]={false,false,false,false,false}; 
+        boolean state2[]={false,false,false,false,false};
+        String[] pokemonList = new String[19];
         //assigning the skills
+
+        String name;
+        System.out.println("Hi Trainer, Welcome to Pokemon World!");
+        
+        System.out.println("What should I call you ? ");
+        
+        name=input.nextLine();
+        
+         System.out.println("\nHi " +name+", Good to see you!");
+         System.out.println("Your very own adventure is about to unfold. Are you ready?");
+         System.out.println("Let's see what you are capable of. Let's battle!\n");
+         System.out.println("Before that, choose your first Pokemon.");
+         
+    //saving the names to an array for easy compare
+    
+        try{
+            int i=0;
+            int counter=0;
+            BufferedReader pokemonName = new BufferedReader(new FileReader("C:\\Users\\LEGION\\Documents\\Courses\\Fundamentals of Programming\\PokemonSimulator\\res\\Pokemon.txt"));
+            do 
+            {
+                if (counter%22==0)
+                {
+                    pokemonList[i]=pokemonName.readLine();
+                    i++;
+                }
+                 counter++;
+            }while ((pokemonName.readLine())!=null);
+            }
+        catch (FileNotFoundException e)
+        {
+            System.out.print("File was not found");
+        }
+    
+        int newline=0;
+        for (int i=0;i<19;i++){
+            System.out.print("["+i+"]"+pokemonList[i]+"\t");
+            newline++;
+            if(newline%6==0)
+                System.out.println("");
+        }
+            System.out.println("");
+        
+        int answer=input.nextInt();
+        pokename1[0]=pokemonList[answer];
+        System.out.println("You chose "+pokename1[0]+" as your first Pokemon.\n");
+        pokename2[0]=pokemonList[r.nextInt(19)];
+        System.out.println("My turn now... "+pokename2[0]+", I choose you!");
+        
+        System.out.println("Which Pokemon would you like to choose next?");
+        answer=input.nextInt();
+        pokename1[1]=pokemonList[answer];
+        System.out.println("You chose "+pokename1[1]+" as your second Pokemon.\n");
+        pokename2[1]=pokemonList[r.nextInt(19)];
+        System.out.println("As for me, "+pokename2[1]+" is my choice!");
+        
+        System.out.println("Your turn now. Which pokemon would you add to complete your team?");
+        answer=input.nextInt();
+        pokename1[2]=pokemonList[answer];
+        System.out.println("You chose "+pokename1[2]+" as your third Pokemon.\n");
+        pokename2[2]=pokemonList[r.nextInt(19)];
+        System.out.println("I choose "+pokename2[2]+" as my final pokemon!\n");
         
         //weather generator
         weather = r.nextInt(3); //0=nice day, neutral, 1=sunny day, 2=rainy day
@@ -37,26 +107,29 @@ public class PokemonSimulator {
             case 1: System.out.println("It's a sunny day! With this weather, keep yourselves hydrated.");
             break;
             default: System.out.println("It's raining! Get shelter or you'll be soaking wet!");
-        }
+        }        
         //switching pokemons
         System.out.println("Which Pokemon would you like to switch to?");
         int select=input.nextInt();
         do{
             pokeslot1=select;
-            if (player1stats[pokeslot1][2]<=0)
+            if (player1stats[pokeslot1][2]<0)
                     System.out.println("That pokemon has fainted, choose another pokemon!");
             else break;
             }while(true);
         System.out.println("You have chosen ...");//to be changed
+        
+        
     }
     
     
-public static void Moveset(int move, int pokeslot1, int pokeslot2, double[][] player1stats, double[][] player2stats, double[] speed, double[] accuracy, int[] weather, boolean[] state1,boolean[] state2){
+public static void Moveset(int move, int pokeslot1, int pokeslot2, double[][] player1stats, double[][] player2stats, double speed1,double speed2, double[] accuracy, int[] weather, boolean[] state1,boolean[] state2){
     String [][] skill= new String [3][4];
     double dmg;
     double flinch;
     double debuffacc;
     double confused;
+    double burn;
     Random r = new Random ();
     String temp="";
     if (state1[0]==true)//solarbeam
@@ -88,7 +161,7 @@ public static void Moveset(int move, int pokeslot1, int pokeslot2, double[][] pl
                                 player1stats[pokeslot1][2]-=dmg/4;
                                 rage(state2,player2stats,pokeslot2);
                                 break;
-        case "Quick Attack":    speed[0]+=50;//If possible speed is applied before attack phase
+        case "Quick Attack":    speed1+=50;//If possible speed is applied before attack phase
                                 dmg=damage(70-accuracy[0],player1stats[pokeslot1][0],40,player2stats[pokeslot2][1],player2stats[pokeslot2][4],0);
                                 if(state1[3]==true){
                                     System.out.println("Your Pokemon is confused!");
@@ -101,11 +174,12 @@ public static void Moveset(int move, int pokeslot1, int pokeslot2, double[][] pl
                                 break;
         case "Tail Whip":       player2stats[pokeslot2][1]-=20;
                                 if(player2stats[pokeslot2][1]<0)//Apply this to every stat!
-                                    player2stats[pokeslot2][1]=0;break;
+                                    player2stats[pokeslot2][1]=0;
+                                break;
         case "Sand Attack":
         case "Flash":           accuracy[1]-=15;
                                 break;
-        case "Hyper Beam":      speed[1]-=100;
+        case "Hyper Beam":      speed2-=100;
                                 dmg=damage(60-accuracy[0],player1stats[pokeslot1][0],150,player2stats[pokeslot2][1],player2stats[pokeslot2][4],0);
                                 if(state1[3]==true){
                                     System.out.println("Your Pokemon is confused!");
@@ -126,7 +200,7 @@ public static void Moveset(int move, int pokeslot1, int pokeslot2, double[][] pl
                                 else player2stats[pokeslot2][2]-=dmg;
                                 rage(state2,player2stats,pokeslot2);
                                 break;
-        case "Rest":            speed[0]-=200;
+        case "Rest":            speed1-=200;
                                 player1stats[pokeslot1][2]=160;//Only for Snorlax for now
                                 break;
         case "Harden":          player1stats[pokeslot1][1]+=15;
@@ -209,7 +283,7 @@ public static void Moveset(int move, int pokeslot1, int pokeslot2, double[][] pl
                                 flinch = r.nextInt(10001);
                                 flinch/=100;
                                 if(flinch>=70){
-                                    speed[1]-=100;
+                                    speed2-=100;
                                     System.out.println("The enemy flinched with that attack!");
                                 }
                                 break;
@@ -303,7 +377,13 @@ public static void Moveset(int move, int pokeslot1, int pokeslot2, double[][] pl
                                     state1[3]=false;break;
                                 }
                                 else player2stats[pokeslot2][2]-=dmg;
-                                player1stats[pokeslot1][2]-=dmg/3;//Actually has a 10% chance of burning target
+                                player1stats[pokeslot1][2]-=dmg/3;
+                                burn=r.nextInt(10001);
+                                burn/=100;
+                                if(burn>=90){
+                                    state2[4]=true;
+                                    System.out.println("The attack caused the enemy to burn!");
+                                }
                                 rage(state2,player2stats,pokeslot2);
                                 break;
         case "Scratch":         dmg=damage(70-accuracy[0],player1stats[pokeslot1][0],40,player2stats[pokeslot2][1],player2stats[pokeslot2][4],0);
@@ -344,7 +424,13 @@ public static void Moveset(int move, int pokeslot1, int pokeslot2, double[][] pl
                                     player1stats[pokeslot1][2]-=dmg;
                                     state1[3]=false;break;
                                 }
-                                else player2stats[pokeslot2][2]-=dmg;//Actually has a 10% chance of burning target
+                                else player2stats[pokeslot2][2]-=dmg;
+                                burn=r.nextInt(10001);
+                                burn/=100;
+                                if(burn>=90){
+                                    state1[4]=true;
+                                    System.out.println("The attack caused the enemy to burn!");
+                                }
                                 rage(state2,player2stats,pokeslot2);
                                 break;
         case "Flame Charge":    dmg=damage(70-accuracy[0],player1stats[pokeslot1][0],50,player2stats[pokeslot2][1],player2stats[pokeslot2][4],3);
@@ -367,10 +453,16 @@ public static void Moveset(int move, int pokeslot1, int pokeslot2, double[][] pl
                                 }
                                 else player2stats[pokeslot2][2]-=dmg;
                                 rage(state2,player2stats,pokeslot2);
+                                burn=r.nextInt(10001);
+                                burn/=100;
+                                if(burn>=90){
+                                    state2[4]=true;
+                                    System.out.println("The attack caused the enemy to burn!");
+                                }
                                 flinch = r.nextInt(10001);
                                 flinch/=100;
                                 if(flinch>=90){
-                                    speed[1]-=100;                                              //Actually has a 10% chance of burning target
+                                    speed2-=100;
                                     System.out.println("The enemy flinched with that attack!"); //Actually only applies when opponent has not moved
                                 }
                                 break;
@@ -469,8 +561,8 @@ public static void Moveset(int move, int pokeslot1, int pokeslot2, double[][] pl
                                 flinch = r.nextInt(10001);
                                 flinch/=100;
                                 if(flinch>=70){
-                                    speed[1]-=110;
-                                    System.out.println("The enemy was paralyzed with that attack!"); //borrows flinch variable
+                                    speed2-=110;
+                                    System.out.println("The enemy is paralyzed with that attack!"); //borrows flinch variable
                                 }
                                 break;
         case "Flamethrower":    dmg=damage(70-accuracy[0],player1stats[pokeslot1][0],90,player2stats[pokeslot2][1],player2stats[pokeslot2][4],3);
@@ -480,7 +572,13 @@ public static void Moveset(int move, int pokeslot1, int pokeslot2, double[][] pl
                                     player1stats[pokeslot1][2]-=dmg;
                                     state1[3]=false;break;
                                 }
-                                else player2stats[pokeslot2][2]-=dmg;//Actually has a 10% chance of burning target.
+                                else player2stats[pokeslot2][2]-=dmg;
+                                burn=r.nextInt(10001);
+                                burn/=100;
+                                if(burn>=90){
+                                    state2[4]=true;
+                                    System.out.println("The attack caused the enemy to burn!");
+                                }
                                 rage(state2,player2stats,pokeslot2);
                                 break;
         case "Swift":           dmg=damage(100,player1stats[pokeslot1][0],60,player2stats[pokeslot2][1],player2stats[pokeslot2][4],0);
@@ -549,7 +647,7 @@ public static void rage(boolean[] state2, double player2stats[][],int pokeslot2)
     }
 }
 public static double damage(double accuracy,double attack,double power,double defense,double type_enemy,int type){
-
+//0 normal, 1 grass, 2 water, 3 fire
        if (type_enemy==0 && type==1) //normal attack fire
             return((attack*power/defense)/20)+2;
        
@@ -605,104 +703,5 @@ public static double damage(double accuracy,double attack,double power,double de
     
     else
         return((attack*power/defense)/20+2)/2;
-        
- //Starting of GAME
-     Scanner s=new Scanner(System.in);
-        String name;
-        System.out.println("\n\t\t");
-        
-        System.out.println("Hi Trainer, Welcome to Pokemon World!");
-        
-        System.out.print("What should I call you ? ");
-        
-        name=s.nextLine();
-        
-         System.out.print("\nHi " +name);
-         System.out.print("! Good to see you!");
-         System.out.println("Your very own adventure is about to unfold. Are you ready?");
-         System.out.println("Now, I'll let you to choose your very first pokemon!");
-         
-         System.out.println("\nWhich pokemon would you like to choose?Please type the number. \n1.CHARMANDER(FIRE) 2.CYNDAQUIL(FIRE) 3.BLAZIKEN(FIRE)\n"
-                 + "4.EEVEE(NORMAL) 5.SNORLAX(NORMAL) 6.PORYGON(NORMAL) \n7.SCEPTILE(GRASS) 8.GROTLE(GRASS) 9.SNIVY(GRASS)"
-                 + "\n10.SQUIRTLE(WATER) 11.TOTODILE(WATER) 12.MUDKIP(WATER)");
-   
-   int answer=s.nextInt();
-   s.nextLine();
-   while (!(answer>0 && answer<20))
-   {
-       System.out.println("You have enter a wrong number,Please enter again!");
-       answer=s.nextInt();
-       s.nextLine();
-   }
-   
-     switch (answer)
-  {
-      case(1):
-       System.out.println("Okay,so you've chose CHARMANDER as your first pokemon.");
-        break;
-      case(2):
-      System.out.println("Okay,so you've chose CYNDAQUIL as your first pokemon.");
-        break;
-       case(3):
-      System.out.println("Okay,so you've chose BLAZIKEN as your first pokemon.");
-        break;
-         case(4):
-      System.out.println("Okay,so you've chose EEVEEE as your first pokemon.");
-        break;
-         case(5):
-      System.out.println("Okay,so you've chose SNORLAX as your first pokemon.");
-        break;
-         case(6):
-      System.out.println("Okay,so you've chose PORYGON as your first pokemon.");
-        break;
-         case(7):
-      System.out.println("Okay,so you've chose SCEPTILE as your first pokemon.");
-        break;
-         case(8):
-      System.out.println("Okay,so you've chose GROTLE as your first pokemon.");
-        break;
-         case(9):
-      System.out.println("Okay,so you've chose SNIVY as your first pokemon.");
-        break;
-         case(10):
-      System.out.println("Okay,so you've chose SQUIRTLE as your first pokemon.");
-        break;
-         case(11):
-      System.out.println("Okay,so you've chose TOTODILE as your first pokemon.");
-        break;
-         case(12):
-      System.out.println("Okay,so you've chose MUDKIP as your first pokemon.");
-        break;
-        case(13):
-      System.out.println("Okay,so you've chose BULBASAUR as your first pokemon.");
-        break;
-        case(14):
-      System.out.println("Okay,so you've chose CHIKORITA as your first pokemon.");
-        break;
-        case(15):
-      System.out.println("Okay,so you've chose TURTWIG as your first pokemon.");
-        break;
-        case(16):
-      System.out.println("Okay,so you've chose CHIMCHAR as your first pokemon.");
-        break;
-        case(17):
-      System.out.println("Okay,so you've chose PIPLUP as your first pokemon.");
-        break;
-        case(18):
-      System.out.println("Okay,so you've chose TEPIG as your first pokemon.");
-        break;
-        default:
-      System.out.println("Okay,so you've chose OSHAWOTT as your first pokemon.");
-        break;                
-        
-     }
- 
-      System.out.println("Would you like to give a nickname for your pokemon?");
-        nickname=s.nextLine();
-        System.out.println("You've named it to "+nickname+ " !");
-
- //Starting until choosing pokemon 
-    
-    
 }
 }
