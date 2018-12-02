@@ -1,0 +1,110 @@
+//i is the number(0,1 and 2) for the (i+1)th pokemon in a particular team
+//checking for the own team only not the opponent's
+  public void pokemonChoose(int i){
+            System.out.print("Please choose pokemon:");
+            choose=s.nextLine();
+            for (int a=0;a<pokemonList.length;a++) {
+                if (choose.equals(pokemonList[a]))
+                {
+                    int x=i-1;
+                    while(x>=0)
+                    {
+                        if (choose.equals(pokemon[x])){
+                                x=i-1;
+                                System.out.print("Please choose pokemon:");
+                                choose=s.nextLine();
+                        }
+                        else
+                        {
+                            pokemon[i]=choose;
+                        }
+                    }
+                    break;
+                }
+                System.out.print("Please choose pokemon:");
+                choose=s.nextLine();
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+public void pokemonChoose(int i){
+            System.out.print("Please choose pokemon:");
+            choose=s.nextLine();
+            for (int a=0;a<pokemonList.length;a++) {
+                if (choose.equals(pokemonList[a]))
+                {
+//                    int x=i-1;
+//                    while(x>=0)
+//                    {
+//                        if (choose.equals(pokemon[x])){
+//                                x=i-1;
+//                                System.out.print("Please choose pokemon:");
+//                                choose=s.nextLine();
+//                        }
+//                        else
+//                        {
+//                            pokemon[i]=choose;
+//                        }
+//                    }
+                    break;
+                }
+                System.out.print("Please choose pokemon:");
+                choose=s.nextLine();
+            }
+        }
+    
+    
+    public void botChoose(int i){
+        System.out.print("Your opponent chose pokemon:");
+            choose=pokemonList[r.nextInt(pokemonList.length+1)];
+//                    int x=i-1;
+//                    while(x>=0)
+//                    {
+//                        if (choose.equals(pokemon[x])){
+//                                x=i-1;
+//                                System.out.print("Please choose pokemon:");
+//                                choose=s.nextLine();
+//                        }
+//                        else
+//                        {
+//                            pokemon[i]=choose;
+//                        }
+//                    }
+            }
+    
+    public void check(int i,int j,PokemonTeam a,PokemonTeam b){
+        int x=i-1;
+        while(x>=0)
+        {
+            if (choose.equals(a.pokemon[x])){
+                x=i-1;
+                System.out.print("Please choose pokemon:");
+                choose=s.nextLine();
+            }
+            else
+            {
+                x=x-1;
+            }
+        }
+        
+        int y=i-1;
+        while(y>=0)
+            {
+                if (choose.equals(b.pokemon[y])){
+                    y=i-1;
+                    System.out.print("Your opponent chose pokemon:");
+                    choose=s.nextLine();
+                }
+                else
+                {
+                    y=y-1;
+                }
+            }
+    }
