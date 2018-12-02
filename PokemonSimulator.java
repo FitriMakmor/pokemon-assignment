@@ -640,68 +640,45 @@ public static void Moveset(int move, int pokeslot1, int pokeslot2, double[][] pl
                                 break;
     }
 }
+
 public static void rage(boolean[] state2, double player2stats[][],int pokeslot2){
     if (state2[2]==true){
         player2stats[pokeslot2][0]+=10;
         System.out.println("Totodile's rage is building!");
     }
 }
+
 public static double damage(double accuracy,double attack,double power,double defense,double type_enemy,int type){
 //0 normal, 1 grass, 2 water, 3 fire
-       if (type_enemy==0 && type==1) //normal attack fire
-            return((attack*power/defense)/20)+2;
-       
-       else if (type_enemy==0 && type==2) //normal attack grass
-            return((attack*power/defense)/20)+2;
-       
-        else if (type_enemy==0 && type==3) //normal attack water
-            return((attack*power/defense)/20)+2;
-           
-       else if (type_enemy==0 && type==0) //normal attack normal
-            return((attack*power/defense)/20)+2;
-    
-       else if (type_enemy==0 && type==3) //normal attack water
-            return((attack*power/defense)/20)+2;
-    
-      else if (type_enemy==1 && type==0) //fire attack normal
-            return((attack*power/defense)/20)+2;
-    
-      else if (type_enemy==1&& type==1) //fire attack fire
+      
+    if (type_enemy==3&& type==3) //fire attack fire
             return(((attack*power/defense)/20)+2)/2;
     
-       else if (type_enemy==1 && type==2) //fire attack grass
+    else if (type_enemy==1 && type==3) //fire attack grass
             return(((attack*power/defense)/20)+2)*2;
     
-      else if (type_enemy==1 && type==3) //fire attack water
+    else if (type_enemy==2 && type==3) //fire attack water
             return(((attack*power/defense)/20)+2)/2;
     
-    
-     else if (type_enemy==2 && type==0) //grass attack normal
-         return(((attack*power/defense)/20)+2);
-    
-    
-    else if (type_enemy==2 && type==1) //grass attack fire
+    else if (type_enemy==3 && type==1) //grass attack fire
             return(((attack*power/defense)/20)+2)/2;
     
-      else if (type_enemy==2 && type==2) //grass attack grass
+    else if (type_enemy==1 && type==1) //grass attack grass
             return(((attack*power/defense)/20)+2)/2;
     
-      else if (type_enemy==2 && type==3) //grass attack water
+    else if (type_enemy==2 && type==1) //grass attack water
+            return(((attack*power/defense)/20)+2)*2;
+      
+    else if (type_enemy==3 && type==2) //water attack fire
             return(((attack*power/defense)/20)+2)*2;
     
-      else if (type_enemy==3 && type==0) //water attack normal
-            return(((attack*power/defense)/20)+2);
-    
-    else if (type_enemy==3 && type==1) //water attack fire
+    else if (type_enemy==3 && type==2) //water attack fire
             return(((attack*power/defense)/20)+2)*2;
     
-      else if (type_enemy==3 && type==1) //water attack fire
-            return(((attack*power/defense)/20)+2)*2;
-    
-      else if (type_enemy==3 && type==2) //water attack grass
+    else if (type_enemy==1 && type==2) //water attack grass
             return(((attack*power/defense)/20)+2)/2;
     
     else
-        return((attack*power/defense)/20+2)/2;
+            return(((attack*power/defense)/20)+2);
 }
 }
