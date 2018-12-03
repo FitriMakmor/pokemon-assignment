@@ -681,4 +681,55 @@ public static double damage(double accuracy,double attack,double power,double de
     else
             return(((attack*power/defense)/20)+2);
 }
+    
+    public static void CombatLoop (int player1stats[][], int player2stats[][], int pokeslot1, int pokeslot2, int weather) {
+        Random r = new Random();
+        Scanner input = new Scanner(System.in);
+        int SpeedCounter1 = 0;    //Player 1's Pokemon Speed Counter
+        int SpeedCounter2 = 0;    //Player 2's Pokemon Speed Counter
+        
+        //Attack Counter loop
+        do {
+            // random generator to decide who goes first
+            int DecideFirstTurn = r.nextInt(2);
+            // if 1, player 2's counter starts first
+            if (DecideFirstTurn == 1) {
+                SpeedCounter2 += player2stats[pokeslot2][3];
+                System.out.println("Speed Counter = "+SpeedCounter2);
+            }
+
+            //Speed Counter loop
+            do {
+                SpeedCounter1 += player2stats[pokeslot2][3];
+                System.out.println("Speed Counter = "+SpeedCounter1);
+                if (SpeedCounter1 >=100)break;
+                SpeedCounter2 += player2stats[pokeslot2][3];
+                System.out.println("Speed Counter = "+SpeedCounter2);
+            } while ((SpeedCounter1 < 100) || (SpeedCounter2 < 100));
+            
+            //deduct speed, do damage
+            if (SpeedCounter1 >=100){
+                SpeedCounter1-=100;
+                System.out.println("Player 1 attacks!");
+                //prompt user to choose skill
+                System.out.println("Which move would you like to use?");
+                /*
+                
+                display moves available to select
+                
+                */
+                int MoveSelection = input.nextInt();
+                Moveset(MoveSelection,pokeslot1,pokeslot2,player1stats[][],player2stats[][],SpeedCounter1,SpeedCounter2, double[] accuracy, weather, boolean[] state1,boolean[] state2);
+            }//the Moveset method's speed must be modified to 2 primitive data types, not arrays, and adjust accordingly
+            // not sure what's State 1 and State 2, yet to change these 2 variables
+            // double []accuracy? this depends on Moveset's choice right?
+            
+            else{
+                SpeedCounter2-=100;
+                System.out.println("Player 2 attacks!");
+            }
+            
+            
+        } while (player1stats[pokeslot1][2] > 0 || player2stats[pokeslot2][2] > 0);
+    }
 }
