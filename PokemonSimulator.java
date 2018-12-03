@@ -105,6 +105,20 @@ public class PokemonSimulator {
       System.out.println("Would you like to give a nickname for your pokemon?");
         nickname=s.nextLine();
         System.out.println("You've named it to "+nickname+ " !");
+        
+        
+        
+        
+        
+        
+        //Ending of game
+        
+        if()
+        System.out.println("You win the battle!");
+        else
+        System.out.println("Your pokemon is fainted ! You have no more pokemon to battle ! You lose!");
+        
+        
     }
 }
 
