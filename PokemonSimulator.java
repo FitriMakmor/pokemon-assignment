@@ -263,59 +263,89 @@ public class PokemonSimulator {
                 System.out.println("It's raining! Get shelter or you'll be soaking wet!");
         }
         TimeUnit.SECONDS.sleep(2);
-        do {
-            // random generator to decide who goes first
-            int DecideFirstTurn = r.nextInt(2);
-            // if 1, player 2's counter starts first
-            if (DecideFirstTurn == 1) {
-                System.out.println("Prof. Tualang gets to start first!");
-                speed[1] += player2stats[0][3];
-                System.out.println(pokename2[0] + "'s Speed -> " + speed[1]);
-                TimeUnit.SECONDS.sleep(1);
-            } else {
-                System.out.println(name + " gets to start first!");
-            }
+        
+        do{
+        CombatLoop(name, pokename1[], pokename2[], player1stats[][], pokeslot1, player2stats[][], pokeslot2, speed[], accuracy, weather, state1[], state2[], bot);
+        }while(((player1stats[0][2] > 0)||(player1stats[1][2] > 0)||(player1stats[2][2] > 0))&&((player2stats[0][2] > 0)||(player2stats[1][2] > 0)||(player2stats[2][2] > 0)));
+        
+        //end of game
+        if (((player1stats[0][2] <= 0) && (player1stats[1][2] <= 0) && (player1stats[2][2] <= 0))) {
+            System.out.println("Woops! Apparently all 3 of your Pokemons have fainted.");
+            System.out.println("What a great fight it was! Till we meet again!");
+        } //player 2 loses
+        else if (((player2stats[0][2] <= 0) && (player2stats[1][2] <= 0) && (player2stats[2][2] <= 0))) {
+            System.out.println("Woops! Apparently all 3 of your opponent's Pokemons have fainted.");
+            System.out.println("Congratulations on winning! Till we meet again!");
+        }
+        
+        public static void CombatLoop(String name, String pokename1[], String pokename2[], int player1stats[][], int pokeslot1, int player2stats[][], int pokeslot2, int speed[], int accuracy, int weather, boolean state1[], boolean state2[], boolean bot) throws InterruptedException {
+        if (player1stats[pokeslot1][2] <= 0) {
+            switchPokemon(pokename1[], pokeslot1, player1stats[][]);
+        } //player 2's pokemon faints
+        else if (player2stats[pokeslot2][2] <= 0) {
+            //NEEDS a switchPokemonForBot method
+        } else {
+            Random r = new Random();
+            Scanner input = new Scanner(System.in);
 
-            //Speed Counter loop
             do {
-                speed[0] += player1stats[0][3];
-                System.out.println(pokename1[0] + "'s Speed -> " + speed[0]);
-                TimeUnit.SECONDS.sleep(1);
-                if (speed[0] >= 100) {
-                    break;
+                // random generator to decide who goes first
+                int DecideFirstTurn = r.nextInt(2);
+                // if 1, player 2's counter starts first
+                if (DecideFirstTurn == 1) {
+                    System.out.println("Prof. Tualang gets to start first!");
+                    speed[1] += player2stats[0][3];
+                    System.out.println(pokename2[0] + "'s Speed -> " + speed[1]);
+                    TimeUnit.SECONDS.sleep(1);
+                } else {
+                    System.out.println(name + " gets to start first!");
                 }
-                speed[1] += player2stats[0][3];
-                System.out.println(pokename2[0] + "'s Speed -> " + speed[1]);
-                TimeUnit.SECONDS.sleep(1);
-            } while ((speed[0] < 100) || (speed[1] < 100));
 
-            //deduct speed, do damage
-            if (speed[0] >= 100) {
-                speed[0] -= 100;
-                System.out.println(name + " attacks!");
-                //prompt user to choose skill
-                System.out.println("Which move would you like to use?");
-                /*
-                
+                //Speed Counter loop
+                do {
+                    speed[0] += player1stats[0][3];
+                    System.out.println(pokename1[0] + "'s Speed -> " + speed[0]);
+                    TimeUnit.SECONDS.sleep(1);
+                    if (speed[0] >= 100) {
+                        break;
+                    }
+                    speed[1] += player2stats[0][3];
+                    System.out.println(pokename2[0] + "'s Speed -> " + speed[1]);
+                    TimeUnit.SECONDS.sleep(1);
+                } while ((speed[0] < 100) || (speed[1] < 100));
+
+                //deduct speed, do damage
+                if (speed[0] >= 100) {
+                    speed[0] -= 100;
+                    System.out.println(name + " attacks!");
+                    //prompt user to choose skill
+                    System.out.println("Which move would you like to use?");
+                    System.out.println("0 ");   //insert the Move array
+                    System.out.println("1 ");
+                    System.out.println("2 ");
+                    System.out.println("3 ");
+                    System.out.println("4 Switch Pokemon");
+                    /*
                 display moves available to select
-                
-                 */
-                int MoveSelection = input.nextInt();
-                Moveset(MoveSelection, pokeslot1, pokeslot2, player1stats, player2stats, speed, accuracy, weather, state1, state2, bot);
-            }//the Moveset method's speed must be modified to 2 primitive data types, not arrays, and adjust accordingly
-            //-- I've decided to use the array speed double, so that the value of speed in main can be changed by changing it in the method (as opposed to only being able to change the value in method only if it is non-array).
-            // not sure what's State 1 and State 2, yet to change these 2 variables
-            // -- 0-solarbeam,1-skullbash,2-rage,3-confused,4-burning, State1=attacker's state, state2=target's state
-            // double []accuracy? this depends on Moveset's choice right?
-            // -- sry, this might have been poorly named. Its actually the accuracy reduction. (100-accuracy[0]) <<accuracy[0]=attacker, accuracy[1]=target
-            else {
-                speed[1] -= 100;
-                System.out.println("Prof. Tualang attacks!");
-            }
+                     */
 
-        } while (player1stats[pokeslot1][2] > 0 || player2stats[pokeslot2][2] > 0);
+                    int MoveSelection = input.nextInt();
+                    if (MoveSelection == 4) {
+                        switchPokemon(pokename1[], pokeslot1, player1stats[][]);
+                    } else {
+                        Moveset(MoveSelection, pokeslot1, pokeslot2, player1stats, player2stats, speed, accuracy, weather, state1, state2, bot);
+                    }
+                } else {
+                    speed[1] -= 100;
+                    System.out.println("Prof. Tualang attacks!");
+                    int MoveSelection = r.nextInt(4);
+                    Moveset(MoveSelection, pokeslot2, pokeslot1, player2stats, player1stats, speed, accuracy, weather, state2, state1, bot);
+                }
+
+            } while ((player1stats[pokeslot1][2] > 0) && (player2stats[pokeslot2][2] > 0));
+        }
     }
-
+    
     public static void Moveset(int move, int pokeslot1, int pokeslot2, double[][] attackerstats, double[][] targetstats, double[] speed, double[] accuracy, int[] weather, boolean[] state1, boolean[] state2, boolean bot) {
         if (bot == true) {
             double temp = speed[0];
