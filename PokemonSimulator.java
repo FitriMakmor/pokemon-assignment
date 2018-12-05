@@ -266,7 +266,7 @@ public class PokemonSimulator {
         
         do{
         CombatLoop(name, pokename1[], pokename2[], player1stats[][], pokeslot1, player2stats[][], pokeslot2, speed[], accuracy, weather, state1[], state2[], bot);
-        }while((player1stats[0][2] > 0)||(player1stats[1][2] > 0)||(player1stats[2][2] > 0)||(player2stats[0][2] > 0)||(player2stats[1][2] > 0)||(player2stats[2][2] > 0));
+        }while(((player1stats[0][2] > 0)||(player1stats[1][2] > 0)||(player1stats[2][2] > 0))&&((player2stats[0][2] > 0)||(player2stats[1][2] > 0)||(player2stats[2][2] > 0)));
         
         //end of game
         if (((player1stats[0][2] <= 0) && (player1stats[1][2] <= 0) && (player1stats[2][2] <= 0))) {
