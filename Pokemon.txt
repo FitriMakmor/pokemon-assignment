@@ -205,7 +205,7 @@ water
 65
 70
 
-Snivy   
+Snivy
 grass
 90
 110
@@ -430,6 +430,29 @@ Take Down
 normal
 90
 55
+Hydro Pump
+water
+120
+50
+
+Poliwhirl
+water
+65
+65
+65
+90
+Rage
+normal
+20
+70
+Water Gun
+water
+40
+70
+Body Slam
+normal
+85
+70
 Hydro Pump
 water
 120
