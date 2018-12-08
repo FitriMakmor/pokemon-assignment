@@ -1,1 +1,459 @@
+Bulbasaur
+grass
+114
+114
+45
+45
+Vine Whip
+grass
+45
+70
+Tackle
+normal
+40
+70
+Razor Leaf
+grass
+55
+65
+Seed Bomb
+grass
+80
+70
 
+Charmander
+fire
+112
+93
+39
+65
+Scratch
+normal
+40
+70
+Ember
+fire
+40
+70
+Fire Fang
+fire
+65
+65
+Slash
+normal
+70
+70
+
+Squirtle
+water
+98
+129
+44
+43
+Tackle
+normal
+40
+70
+Water Gun
+water
+40
+70
+Hydro Pump
+water
+110
+50
+Water Pulse
+water
+60
+70
+
+Chikorita
+grass
+98
+130
+45
+45
+Tackle
+normal
+40
+70
+Razor Leaf
+grass
+55
+65
+Magical Leaf
+grass
+60
+100
+Body Slam
+normal
+85
+70
+
+Cyndaquil
+fire
+112
+93
+39
+65
+Tackle
+normal
+40
+70
+Ember
+fire
+40
+70
+Flamethrower
+fire
+90
+70
+Swift
+normal
+60
+100
+
+Totodile
+water
+109
+112
+50
+43
+Scratch
+normal
+40
+70
+Water Gun
+water
+40
+70
+Aqua Tail
+water
+90
+60
+Slash
+normal
+70
+70
+
+Turtwig
+grass
+113
+119
+55
+31
+Tackle
+normal
+40
+70
+Razor Leaf
+grass
+55
+65
+Leaf Storm
+grass
+130
+60
+Cut
+normal
+50
+65
+
+Chimchar
+fire
+116
+88
+44
+61
+Scratch
+normal
+40
+70
+Ember
+fire
+40
+70
+Flamethrower
+fire
+90
+70
+Facade
+normal
+70
+70
+
+Piplup
+water
+111
+109
+53
+40
+Pound
+normal
+40
+70
+Bubble
+water
+40
+70
+Hydro Pump
+water
+110
+50
+Bubble Beam
+water
+65
+70
+
+Snivy
+grass
+90
+110
+45
+63
+Tackle
+normal
+40
+70
+Vine Whip
+grass
+45
+70
+Leaf Blade
+grass
+90
+70
+Leaf Storm
+grass
+130
+60
+
+Tepig
+fire
+108
+90
+65
+45
+Tackle
+normal
+40
+70
+Ember
+fire
+40
+70
+Flare Blitz
+fire
+120
+70
+Flamethrower
+fire
+90
+70
+
+Oshawott
+water
+118
+90
+55
+45
+Tackle
+normal
+40
+70
+Water Gun
+water
+40
+70
+Hydro Pump
+water
+110
+50
+Aqua Tail
+water
+90
+60
+
+Eevee
+normal
+55
+50
+55
+55
+Take Down
+normal
+90
+55
+Quick Attack
+normal
+40
+100
+Tail Whip
+normal
+0
+0
+Sand Attack
+normal
+0
+0
+
+Snorlax
+normal
+110
+65
+160
+30
+Hyper Beam
+normal
+150
+60
+Mega Punch
+normal
+80
+55
+Rest
+normal
+0
+0
+Harden
+normal
+0
+0
+
+Porygon
+normal
+60
+70
+65
+40
+Tackle
+normal
+40
+70
+Recover
+normal
+0
+0
+Agility
+normal
+0
+0
+Flash
+normal
+0
+0
+
+Sceptile
+grass
+85
+65
+70
+50
+Leaf Storm
+grass
+130
+60
+Leaf Blade
+grass
+90
+70
+Solar Beam
+grass
+120
+70
+Agility
+normal
+0
+0
+
+Grotle
+grass
+89
+85
+75
+36
+Absorb
+grass
+20
+70
+Razor Leaf
+grass
+55
+65
+Bite
+dark
+60
+70
+Giga Drain
+grass
+75
+70
+
+Blaziken
+fire
+120
+70
+80
+80
+Blaze Kick
+fire
+85
+60
+Scratch
+normal
+40
+70
+Flame Charge
+fire
+50
+70
+Flare Blitz
+fire
+120
+70
+
+Mudkip
+water
+50
+70
+50
+40
+Rain Dance
+water
+0
+100
+Water Gun
+water
+40
+70
+Take Down
+normal
+90
+55
+Hydro Pump
+water
+120
+50
+
+Poliwhirl
+water
+65
+65
+65
+90
+Rage
+normal
+20
+70
+Water Gun
+water
+40
+70
+Body Slam
+normal
+85
+70
+Hydro Pump
+water
+120
+50
