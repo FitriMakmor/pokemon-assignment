@@ -322,7 +322,18 @@ public class PokemonSimulator {
 
         System.out.println("Looks like we are both set and ready to go, press ENTER to start!\n");
         input.nextLine();
-        while ((temp = input.nextLine()).length() > 0) {
+        String line=input.nextLine();
+        if("dev".equals(line)){
+            System.out.println("Dev mode activated.\n");
+            player1stats[0][0]+=100000;
+        }else if("doubleg".equals(line)){
+            System.out.println("GG mode activated.\n");
+            player2stats[0][0]+=100000;
+            player2stats[1][0]+=100000;
+            player2stats[2][0]+=100000;
+        }
+        line="";
+        while (line.length() > 0) {
         }
 
         System.out.println("COMBAT START");
@@ -346,15 +357,16 @@ public class PokemonSimulator {
         } while (((player1stats[0][2] > 0) || (player1stats[1][2] > 0) || (player1stats[2][2] > 0)) && ((player2stats[0][2] > 0) || (player2stats[1][2] > 0) || (player2stats[2][2] > 0)));
 
         //end of game
-        System.out.println("COMBAT END");
+        System.out.println("\nCOMBAT END\n");
         if (((player1stats[0][2] <= 0) && (player1stats[1][2] <= 0) && (player1stats[2][2] <= 0))) {
             System.out.println("Woops! Apparently all 3 of your Pokemons have fainted.");
             System.out.println("What a great fight it was! Till we meet again!");
         } //player 2 loses
         else if (((player2stats[0][2] <= 0) && (player2stats[1][2] <= 0) && (player2stats[2][2] <= 0))) {
-            System.out.println("Woops! Apparently all 3 of your my Pokemons have fainted.");
+            System.out.println("Woops! Apparently all 3 of my Pokemons have fainted.");
             System.out.println("Congratulations on winning! Till we meet again!");
         }
+        else System.out.println("???");
     }
 
     public static void CombatLoop(String movelist1[][], String movelist2[][], String name, String pokename1[], String pokename2[], double player1stats[][], int pokeslot1, double player2stats[][], int pokeslot2, double speed[], double accuracy[], int weather[], boolean state1[], boolean state2[], boolean[] bot, double[] startinghp, boolean[] hasSwitched) throws InterruptedException {
@@ -413,7 +425,7 @@ public class PokemonSimulator {
 
                 int MoveSelection = input.nextInt();
                 if (MoveSelection == 4) {
-                    switchPokemon(pokename1, pokeslot1, player1stats, movelist1, speed);
+                    switchPokemon(pokename1, pokeslot1, player1stats, movelist1, speed, state1);
                 } else {
                     beforehp = player2stats[0][2];
                     Moveset(pokename1, movelist1, MoveSelection, pokeslot1, pokeslot2, player1stats, player2stats, speed, accuracy, weather, state1, state2, bot);
@@ -442,19 +454,19 @@ public class PokemonSimulator {
                 elementcounters = 5; //will not be in the range and therefore makes next statement false
             }
 
-            if (player1stats[pokeslot1][2] <= 0 && player1stats[1][2] > 0 && player1stats[2][2] > 0) {
-                switchPokemon(pokename1, pokeslot1, player1stats, movelist1, speed);
+            if (player1stats[pokeslot1][2] <= 0 && (player1stats[1][2] > 0 || player1stats[2][2] > 0)) {
+                switchPokemon(pokename1, pokeslot1, player1stats, movelist1, speed, state1);
             } //player 2's pokemon faints
-            if (player2stats[pokeslot2][2] <= 0 && player2stats[1][2] > 0 && player2stats[2][2] > 0) {
-                switchPokemonBot(pokename2, pokeslot2, player2stats, player1stats, movelist2, speed, hasSwitched);
-            } else if (player2stats[pokeslot2][2] <= (3 / 20) * startinghp[pokeslot2] && hasSwitched[0] == false) {
+            if (player2stats[pokeslot2][2] <= 0 && (player2stats[1][2] > 0 || player2stats[2][2] > 0)) {
+                switchPokemonBot(pokename2, pokeslot2, player2stats, player1stats, movelist2, speed, hasSwitched, state2);
+            } else if (player2stats[pokeslot2][2] <= (3 / 20) * startinghp[pokeslot2] && hasSwitched[0] == false && (player2stats[1][2] > 0 || player2stats[2][2] > 0)) {
                 hasSwitched[0] = true;
-                switchPokemonBot(pokename2, pokeslot2, player2stats, player1stats, movelist2, speed, hasSwitched);
-            } else if (player1stats[0][4] == elementfaced && player2stats[0][4] == elementcounters && (player2stats[0][4] != player2stats[1][4] && player2stats[0][4] != player2stats[2][4])) {
+                switchPokemonBot(pokename2, pokeslot2, player2stats, player1stats, movelist2, speed, hasSwitched, state2);
+            } else if (player1stats[0][4] == elementfaced && player2stats[0][4] == elementcounters && (player2stats[0][4] != player2stats[1][4] && player2stats[0][4] != player2stats[2][4]) && (player2stats[1][2] > 0 || player2stats[2][2] > 0)) {
                 int willSwitch = r.nextInt(10001);
                 willSwitch /= 100;
                 if (willSwitch >= 85) {
-                    switchPokemonBot(pokename2, pokeslot2, player2stats, player1stats, movelist2, speed, hasSwitched);
+                    switchPokemonBot(pokename2, pokeslot2, player2stats, player1stats, movelist2, speed, hasSwitched, state2);
                 }
             } else;
         } while ((player1stats[pokeslot1][2] > 0) && (player2stats[pokeslot2][2] > 0));
@@ -1217,10 +1229,11 @@ public class PokemonSimulator {
         }
     }
 
-    public static void switchPokemon(String pokename1[], int pokeslot1, double player1stats[][], String movelist1[][], double speed[]) {
+    public static void switchPokemon(String pokename1[], int pokeslot1, double player1stats[][], String movelist1[][], double speed[], boolean state[]) {
         Scanner input = new Scanner(System.in);
         String temp;
         double temp2;
+        boolean temp3;
         System.out.println("Which Pokemon would you like to switch to?");
         System.out.println("[1]" + pokename1[1] + "\t[2]" + pokename1[2] + "\n");
         int select = input.nextInt();
@@ -1250,10 +1263,15 @@ public class PokemonSimulator {
             movelist1[0][i] = movelist1[select][i];
             movelist1[select][i] = temp;
         }
+        for (int i = 0; i < 3; i++) {
+            temp3 = state[i];
+            state[i]=state[select];
+            state[select]=temp3;
+        }
         speed[0] = 0;
     }
 
-    public static void switchPokemonBot(String[] pokename, int pokeslot, double[][] botstats, double[][] ourstats, String[][] movelist, double[] speed, boolean hasSwitched[]) {
+    public static void switchPokemonBot(String[] pokename, int pokeslot, double[][] botstats, double[][] ourstats, String[][] movelist, double[] speed, boolean hasSwitched[], boolean state[]) {
         Random r = new Random();
         String temp;
         double temp2, counterelement;
@@ -1306,6 +1324,11 @@ public class PokemonSimulator {
             temp = movelist[0][i];
             movelist[0][i] = movelist[select][i];
             movelist[select][i] = temp;
+        }
+        for (int i = 0; i < 3; i++) {
+            temp3 = state[i];
+            state[i]=state[select];
+            state[select]=temp3;
         }
 
         temp3 = hasSwitched[0];
