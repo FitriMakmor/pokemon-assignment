@@ -8,7 +8,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.logging.Logger;
+import java.io.InputStream;
 import sun.audio.AudioData;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
@@ -47,9 +47,9 @@ public class PokemonSimulator {
         String[] pokemonList = new String[50];
         String temp;
         //assigning the skills
-
         String name;
-
+        music audio = new music();
+        audio.intromusic();
         System.out.println("                                  ,'\\\n"
                 + "    _.----.        ____         ,'  _\\   ___    ___     ____\n"
                 + "_,-'       `.     |    |  /`.   \\,-'    |   \\  /   |   |    \\  |`.\n"
@@ -326,10 +326,12 @@ public class PokemonSimulator {
         if ("dev".equals(line)) {
             System.out.println("Dev mode activated.\n");
             player1stats[0][0] += 100000;
+            player1stats[1][0] += 100000;
+            player1stats[2][0] += 100000;
         } else if ("admin".equals(line)) {
-            int choice,choice2;
+            int choice, choice2;
             double choice3;
-            int proceed=0;
+            int proceed = 0;
             do {
                 System.out.println("Administrator mode activated.");
                 System.out.println("Choose which pokemon you would like to modify: ");
@@ -348,7 +350,7 @@ public class PokemonSimulator {
                     System.out.println("Wrong Input!");
                     break;
                 }
-                System.out.println("Change "+player1stats[choice][choice2]+" to?");
+                System.out.println("Change " + player1stats[choice][choice2] + " to?");
                 choice3 = input.nextDouble();
                 player1stats[choice][choice2] = choice3;
                 System.out.println("Succesfully modified! Press any key to continue modifying, press -1 to exit.");
@@ -365,6 +367,7 @@ public class PokemonSimulator {
         }
 
         System.out.println("COMBAT START");
+        audio.battlemusic();
         TimeUnit.SECONDS.sleep(2);
         //weather generator
         weather[0] = r.nextInt(3); //0=nice day, neutral, 1=sunny day, 2=rainy day
@@ -396,6 +399,7 @@ public class PokemonSimulator {
         } else {
             System.out.println("???");
         }
+        audio.victorymusic();
     }
 
     public static void CombatLoop(String movelist1[][], String movelist2[][], String name, String pokename1[], String pokename2[], double player1stats[][], int pokeslot1, double player2stats[][], int pokeslot2, double speed[], double accuracy[], int weather[], boolean state1[], boolean state2[], boolean[] bot, double[] startinghp, boolean[] hasSwitched) throws InterruptedException {
@@ -781,7 +785,7 @@ public class PokemonSimulator {
 
                 } else {
                     state1[0] = true;
-                    System.out.println(pokename[0]+" charges its solar attack!");
+                    System.out.println(pokename[0] + " charges its solar attack!");
                 }
                 break;
             case "Seed Bomb":
@@ -1371,23 +1375,5 @@ public class PokemonSimulator {
         hasSwitched[select] = temp3;
 
         speed[1] = 0;
-    }
-
-    public static void music() {
-        AudioPlayer MGP = AudioPlayer.player;
-        AudioStream BGM;
-        AudioData MD;
-
-        ContinuousAudioDataStream loop = null;
-
-        try {
-            BGM = new AudioStream(new FileInputStream("/res/music.wav"));
-            MD = BGM.getData();
-            loop = new ContinuousAudioDataStream(MD);
-        } catch (IOException e) {
-            System.out.println("cant find the file");
-        }
-
-        MGP.start(loop);
     }
 }
