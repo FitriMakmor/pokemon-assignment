@@ -359,7 +359,7 @@ grass
 70
 Solar Beam
 grass
-120
+150
 70
 Agility
 normal
