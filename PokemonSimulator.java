@@ -49,6 +49,19 @@ public class PokemonSimulator {
         //assigning the skills
 
         String name;
+        
+        System.out.println("                                  ,'\\\n" +
+"    _.----.        ____         ,'  _\\   ___    ___     ____\n" +
+"_,-'       `.     |    |  /`.   \\,-'    |   \\  /   |   |    \\  |`.\n" +
+"\\      __    \\    '-.  | /   `.  ___    |    \\/    |   '-.   \\ |  |\n" +
+" \\.    \\ \\   |  __  |  |/    ,','_  `.  |          | __  |    \\|  |\n" +
+"   \\    \\/   /,' _`.|      ,' / / / /   |          ,' _`.|     |  |\n" +
+"    \\     ,-'/  /   \\    ,'   | \\/ / ,`.|         /  /   \\  |     |\n" +
+"     \\    \\ |   \\_/  |   `-.  \\    `'  /|  |    ||   \\_/  | |\\    |\n" +
+"      \\    \\ \\      /       `-.`.___,-' |  |\\  /| \\      /  | |   |\n" +
+"       \\    \\ `.__,'|  |`-._    `|      |__| \\/ |  `.__,'|  | |   |\n" +
+"        \\_.-'       |__|    `-._ |              '-.|     '-.| |   |\n" +
+"                                `'                            '-._|");
         System.out.println("Hi Trainer, Welcome to Pokemon World!");
 
         System.out.println("What should I call you ? ");
@@ -429,10 +442,10 @@ public class PokemonSimulator {
                 elementcounters = 5; //will not be in the range and therefore makes next statement false
             }
 
-            if (player1stats[pokeslot1][2] <= 0) {
+            if (player1stats[pokeslot1][2] <= 0 && player1stats[1][2] > 0 && player1stats[2][2] > 0) {
                 switchPokemon(pokename1, pokeslot1, player1stats, movelist1, speed);
             } //player 2's pokemon faints
-            if (player2stats[pokeslot2][2] <= 0) {
+            if (player2stats[pokeslot2][2] <= 0 && player2stats[1][2] > 0 && player2stats[2][2] > 0) {
                 switchPokemonBot(pokename2, pokeslot2, player2stats, player1stats, movelist2, speed, hasSwitched);
             } else if (player2stats[pokeslot2][2] <= (3 / 20) * startinghp[pokeslot2] && hasSwitched[0] == false) {
                 hasSwitched[0] = true;
@@ -443,12 +456,12 @@ public class PokemonSimulator {
                 if (willSwitch >= 85) {
                     switchPokemonBot(pokename2, pokeslot2, player2stats, player1stats, movelist2, speed, hasSwitched);
                 }
-            }
+            } else;
         } while ((player1stats[pokeslot1][2] > 0) && (player2stats[pokeslot2][2] > 0));
     }
 
     public static void Moveset(String pokename[], String[][] skill, int move, int pokeslot1, int pokeslot2, double[][] attackerstats, double[][] targetstats, double[] speed, double[] accuracy, int[] weather, boolean[] state1, boolean[] state2, boolean[] bot) {
-        
+
         if (bot[0] == true) {
             double temp1 = speed[0];
             speed[0] = speed[1];
@@ -477,7 +490,7 @@ public class PokemonSimulator {
         if (state1[4] == true) {
             System.out.println(pokename[0] + " is burning!");
             attackerstats[pokeslot1][2] -= 2; //inflicts burn true damage and removes status
-            System.out.println(pokename[0] + " HP: " + attackerstats[pokeslot1][2]);
+            System.out.printf("%s HP: %.2f\n", pokename[0], attackerstats[pokeslot1][2]);
             state1[4] = false;
         }
         state1[2] = false;//removes rage
@@ -526,7 +539,7 @@ public class PokemonSimulator {
                 accuracy[1] -= 15;
                 break;
             case "Hyper Beam":
-                speed[1] -= 100;
+                speed[0] -= 50;
                 dmg = damage(60 - accuracy[0], attackerstats[pokeslot1][0], 150, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1);
                 if (state1[3] == true) {
                     System.out.println(pokename[0] + " is confused!");
@@ -1213,11 +1226,11 @@ public class PokemonSimulator {
         int select = input.nextInt();
         do {
             pokeslot1 = select;
-            if (player1stats[pokeslot1][2] < 1) {
-                System.out.println("That pokemon has fainted, choose another pokemon!");
-                select = input.nextInt();
-            } else if (select > 2 || select < 1) {
+            if (select > 2 || select < 1) {
                 System.out.println("Invalid Pokemon, select either 1 or 2.");
+                select = input.nextInt();
+            } else if (player1stats[pokeslot1][2] < 0) {
+                System.out.println("That pokemon has fainted, choose another pokemon!");
                 select = input.nextInt();
             } else {
                 break;
@@ -1272,16 +1285,14 @@ public class PokemonSimulator {
 
         do {
             pokeslot = select;
-            if (botstats[pokeslot][2] < 1) {
+            if (botstats[pokeslot][2] < 0) {
                 System.out.println("Oops, that pokemon has fainted, I shall choose another pokemon!");
-                select = r.nextInt();
-            } else if (select > 2 || select < 1) {
-                System.out.println("I've chosen an invalid Pokemon, select either 1 or 2.");
-                select = r.nextInt();
+                select = r.nextInt(2) + 1;
             } else {
                 break;
             }
         } while (true);
+        
         System.out.println("I switch my Pokemon, " + pokename[select] + ", I choose you!");
         temp = pokename[select];
         pokename[select] = pokename[0];
