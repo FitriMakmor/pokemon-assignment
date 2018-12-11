@@ -457,3 +457,49 @@ Hydro Pump
 water
 120
 50
+
+Sharpedo
+water
+70
+110
+40
+95
+Slash
+normal
+70
+100
+Rage
+normal
+20
+100
+Skull Bash
+normal
+130
+100
+Double-Edge
+normal
+120
+100
+
+Carnivine
+grass
+74
+100
+72
+46
+Growth
+normal
+0
+0
+Sunny Day
+fire
+0
+0
+Leaf Tornado
+grass
+65
+90
+Vine Whip
+grass
+45
+100
