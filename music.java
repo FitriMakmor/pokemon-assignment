@@ -19,22 +19,20 @@ import sun.audio.ContinuousAudioDataStream;
  * @author Fitri
  */
 public class music {
-        private static AudioPlayer MGP = AudioPlayer.player;
-        private static AudioStream BGM;
-        private static AudioData MD;
+
+    private static AudioPlayer MGP = AudioPlayer.player;
+    private static AudioStream SFX;
+    private static AudioStream BGM;
+    private static AudioData MD;
+
     public static void intromusic() {
-       
-       
-
-        
-
         ContinuousAudioDataStream loop = null;
 
         try {
             InputStream test = new FileInputStream("C:\\Users\\LEGION\\Documents\\Courses\\Fundamentals of Programming\\PokemonSimulator\\res\\intromusic.wav");
             BGM = new AudioStream(test);
             AudioPlayer.player.start(BGM);
-            //MD = BGM.getData();
+            //MD = SFX.getData();
             //loop = new ContinuousAudioDataStream(MD);
 
         } catch (FileNotFoundException e) {
@@ -43,36 +41,30 @@ public class music {
             System.out.print(error.toString());
         }
     }
-    
+
     public static void battlemusic() {
-            AudioPlayer.player.stop(BGM);
+        AudioPlayer.player.stop(BGM);
         ContinuousAudioDataStream loop = null;
 
         try {
             InputStream test = new FileInputStream("C:\\Users\\LEGION\\Documents\\Courses\\Fundamentals of Programming\\PokemonSimulator\\res\\battlemusic.wav");
             BGM = new AudioStream(test);
             AudioPlayer.player.start(BGM);
-            //MD = BGM.getData();
-            //loop = new ContinuousAudioDataStream(MD);
-
         } catch (FileNotFoundException e) {
             System.out.print(e.toString());
         } catch (IOException error) {
             System.out.print(error.toString());
         }
     }
-    
+
     public static void victorymusic() {
-            AudioPlayer.player.stop(BGM);
+        AudioPlayer.player.stop(BGM);
         ContinuousAudioDataStream loop = null;
 
         try {
             InputStream test = new FileInputStream("C:\\Users\\LEGION\\Documents\\Courses\\Fundamentals of Programming\\PokemonSimulator\\res\\victorymusic.wav");
             BGM = new AudioStream(test);
             AudioPlayer.player.start(BGM);
-            //MD = BGM.getData();
-            //loop = new ContinuousAudioDataStream(MD);
-
         } catch (FileNotFoundException e) {
             System.out.print(e.toString());
         } catch (IOException error) {
@@ -80,4 +72,17 @@ public class music {
         }
     }
 
+    public static void sfx(String sfx) {
+        ContinuousAudioDataStream loop = null;
+
+        try {
+            InputStream test = new FileInputStream("C:\\Users\\LEGION\\Documents\\Courses\\Fundamentals of Programming\\PokemonSimulator\\res\\" + sfx + ".wav");
+            SFX = new AudioStream(test);
+            AudioPlayer.player.start(SFX);
+        } catch (FileNotFoundException e) {
+            System.out.print(e.toString());
+        } catch (IOException error) {
+            System.out.print(error.toString());
+        }
+    }
 }
