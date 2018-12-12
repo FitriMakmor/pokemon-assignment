@@ -39,7 +39,7 @@ public class PokemonSimulator {
         double[] speed = {0, 0};
         double[] accuracy = {0, 0};
         double[] botstartinghp = new double[3];
-        int[] weather = new int[1]; //weather (raining, sunny, nice)
+        int[] weather = new int[1]; //weather (0-nice, 1-sunny, 2-raining)
         boolean state1[] = {false, false, false, false, false}; //0-solarbeam,1-skullbash,2-rage,3-confused,4-burning
         boolean state2[] = {false, false, false, false, false};
         boolean bot[] = {false};
@@ -452,6 +452,24 @@ public class PokemonSimulator {
         }
         boolean playerturn = true;
         do {
+            if(pokename1[0].equals("Eevee")){
+                double enemyelement = player2stats[0][4];
+                System.out.println("");
+        if (enemyelement == 1) {
+            player1stats[0][4] = 3;
+            System.out.println("Flareon readies itself!\n");
+        } else if (enemyelement == 2) {
+            player1stats[0][4] = 1;
+            System.out.println("Leafeon readies itself!\n");
+        } else if (enemyelement == 3) {
+            player1stats[0][4] = 2;
+            System.out.println("Vaporeon readies itself!\n");
+        } else {
+            player1stats[0][4]=0;
+            System.out.println("Eevee readies itself!\n");
+        }
+        music.sfx("evolve");
+            }
             //Speed Counter loop
             do {
                 if (playerturn == true) {
@@ -503,7 +521,7 @@ public class PokemonSimulator {
                 if (j == 4) {
                     System.out.print("Type: ");
                 }
-                System.out.println(player1stats[0][j]);
+                System.out.printf("%.2f\n",player1stats[0][j]);
             }
                     System.out.println("");
                     for (int j = 0; j < 5; j++) {
@@ -614,7 +632,8 @@ public class PokemonSimulator {
             state1[4] = false;
         }
         state1[2] = false;//removes rage
-        System.out.println(pokename[0] + " used " + skill[pokeslot1][move] + "!");
+        System.out.println("\n"+pokename[0] + " used " + skill[pokeslot1][move] + "!");
+        TimeUnit.SECONDS.sleep(1);
         switch (skill[pokeslot1][move]) {
             case "Take Down":
                 dmg = damage(85 - accuracy[0], attackerstats[pokeslot1][0], 90, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1);
@@ -654,10 +673,6 @@ public class PokemonSimulator {
                 TimeUnit.SECONDS.sleep(1);
                 music.sfx("lowerstats");
                 System.out.println("Opponent's defense lowered!");
-                if (targetstats[pokeslot2][1] < 0)//Apply this to every stat!
-                {
-                    targetstats[pokeslot2][1] = 0;
-                }
                 break;
             case "Sand Attack":
             case "Flash":
@@ -726,7 +741,7 @@ public class PokemonSimulator {
 
                 break;
             case "Recover":
-                attackerstats[pokeslot1][2] += 32.50;//Only for Porygon for now
+                attackerstats[pokeslot1][2] += 10;//Only for Porygon for now
                 music.sfx("heal");
                 break;
             case "Agility":
@@ -1160,7 +1175,7 @@ public class PokemonSimulator {
                 state1[2] = true;
                 break;
             case "Rain Dance":
-                weather[0] = 1;
+                weather[0] = 2;
                 System.out.println("It started to rain!");
                 music.sfx("raindance");
                 break;
@@ -1304,7 +1319,14 @@ public class PokemonSimulator {
 
                 break;
         }
-
+        
+        for (int i=0;i<4;i++){
+            if(i==2)break;
+            if (targetstats[0][i] <= 0)
+                targetstats[0][i]=1;
+            if (attackerstats[0][i] <= 0)
+                attackerstats[0][i]=1;
+        }
         if (bot[0] == true) {
             double temp1 = speed[0];
             speed[0] = speed[1];
@@ -1481,3 +1503,9 @@ public class PokemonSimulator {
         speed[1] = 0;
     }
 }
+
+/*
+Developer secrets
+input either admin, dev or doubleg when asked to press ENTER to start to access extra features.
+input 77 when choosing a move to view both character's stats.
+*/
