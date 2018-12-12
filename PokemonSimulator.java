@@ -39,7 +39,7 @@ public class PokemonSimulator {
         double[] speed = {0, 0};
         double[] accuracy = {0, 0};
         double[] botstartinghp = new double[3];
-        int[] weather = new int[1]; //weather (raining, sunny, nice)
+        int[] weather = new int[1]; //weather (raining, sunny, nice,damp)
         boolean state1[] = {false, false, false, false, false}; //0-solarbeam,1-skullbash,2-rage,3-confused,4-burning
         boolean state2[] = {false, false, false, false, false};
         boolean bot[] = {false};
@@ -49,20 +49,19 @@ public class PokemonSimulator {
         //assigning the skills
         String name;
         music audio = new music();
-        music.sfx("onpc");
         audio.intromusic();
         System.out.println("                                  ,'\\\n"
-                    + "    _.----.        ____         ,'  _\\   ___    ___     ____\n"
-                    + "_,-'       `.     |    |  /`.   \\,-'    |   \\  /   |   |    \\  |`.\n"
-                    + "\\      __    \\    '-.  | /   `.  ___    |    \\/    |   '-.   \\ |  |\n"
-                    + " \\.    \\ \\   |  __  |  |/    ,','_  `.  |          | __  |    \\|  |\n"
-                    + "   \\    \\/   /,' _`.|      ,' / / / /   |          ,' _`.|     |  |\n"
-                    + "    \\     ,-'/  /   \\    ,'   | \\/ / ,`.|         /  /   \\  |     |\n"
-                    + "     \\    \\ |   \\_/  |   `-.  \\    `'  /|  |    ||   \\_/  | |\\    |\n"
-                    + "      \\    \\ \\      /       `-.`.___,-' |  |\\  /| \\      /  | |   |\n"
-                    + "       \\    \\ `.__,'|  |`-._    `|      |__| \\/ |  `.__,'|  | |   |\n"
-                    + "        \\_.-'       |__|    `-._ |              '-.|     '-.| |   |\n"
-                    + "                                `'                            '-._|");
+                + "    _.----.        ____         ,'  _\\   ___    ___     ____\n"
+                + "_,-'       `.     |    |  /`.   \\,-'    |   \\  /   |   |    \\  |`.\n"
+                + "\\      __    \\    '-.  | /   `.  ___    |    \\/    |   '-.   \\ |  |\n"
+                + " \\.    \\ \\   |  __  |  |/    ,','_  `.  |          | __  |    \\|  |\n"
+                + "   \\    \\/   /,' _`.|      ,' / / / /   |          ,' _`.|     |  |\n"
+                + "    \\     ,-'/  /   \\    ,'   | \\/ / ,`.|         /  /   \\  |     |\n"
+                + "     \\    \\ |   \\_/  |   `-.  \\    `'  /|  |    ||   \\_/  | |\\    |\n"
+                + "      \\    \\ \\      /       `-.`.___,-' |  |\\  /| \\      /  | |   |\n"
+                + "       \\    \\ `.__,'|  |`-._    `|      |__| \\/ |  `.__,'|  | |   |\n"
+                + "        \\_.-'       |__|    `-._ |              '-.|     '-.| |   |\n"
+                + "                                `'                            '-._|");
         System.out.println("Hi Trainer, Welcome to Pokemon World!");
 
         System.out.println("What should I call you ? ");
@@ -96,7 +95,7 @@ public class PokemonSimulator {
                 System.out.println("");
             }
         }
-        System.out.println("\n");
+        System.out.println("");
 
         int answer = input.nextInt();
         while (answer >= listLength || answer < 0) {
@@ -106,9 +105,6 @@ public class PokemonSimulator {
         pokename1[0] = pokemonList[answer];
         pokemonList[answer] = "MissingNo.";
         System.out.println("You chose " + pokename1[0] + " as your first Pokemon.\n");
-        music.sfx("select");
-        
-        TimeUnit.SECONDS.sleep(1);
 
         botchoice = r.nextInt(listLength);
         while (pokemonList[botchoice].equals("MissingNo.")) {
@@ -117,11 +113,8 @@ public class PokemonSimulator {
         pokename2[0] = pokemonList[botchoice];
         pokemonList[botchoice] = "MissingNo.";
         System.out.println("My turn now... " + pokename2[0] + ", I choose you!");
-        music.sfx("select");
-        
-        TimeUnit.SECONDS.sleep(1);
 
-        System.out.println("Which Pokemon would you like to choose next?\n");
+        System.out.println("Which Pokemon would you like to choose next?");
         answer = input.nextInt();
         while (true) {
             if (answer >= listLength || answer < 0) {
@@ -136,9 +129,6 @@ public class PokemonSimulator {
         pokename1[1] = pokemonList[answer];
         pokemonList[answer] = "MissingNo.";
         System.out.println("You chose " + pokename1[1] + " as your second Pokemon.\n");
-        music.sfx("select");
-        
-        TimeUnit.SECONDS.sleep(1);
 
         botchoice = r.nextInt(listLength);
         while (pokemonList[botchoice].equals("MissingNo.")) {
@@ -148,11 +138,8 @@ public class PokemonSimulator {
         pokename2[1] = pokemonList[botchoice];
         pokemonList[botchoice] = "MissingNo.";
         System.out.println("As for me, " + pokename2[1] + " is my choice!");
-        music.sfx("select");
-        
-        TimeUnit.SECONDS.sleep(1);
 
-        System.out.println("Your turn now. Which pokemon would you add to complete your team?\n");
+        System.out.println("Your turn now. Which pokemon would you add to complete your team?");
         answer = input.nextInt();
         while (true) {
             if (answer >= listLength || answer < 0) {
@@ -167,9 +154,6 @@ public class PokemonSimulator {
         pokename1[2] = pokemonList[answer];
         pokemonList[answer] = "MissingNo.";
         System.out.println("You chose " + pokename1[2] + " as your third Pokemon.\n");
-        music.sfx("select");
-        
-        TimeUnit.SECONDS.sleep(1);
 
         botchoice = r.nextInt(listLength);
         while (pokemonList[botchoice].equals("MissingNo.")) {
@@ -179,10 +163,7 @@ public class PokemonSimulator {
         pokename2[2] = pokemonList[botchoice];
         pokemonList[botchoice] = "MissingNo.";
         System.out.println("I choose " + pokename2[2] + " as my final pokemon!\n");
-        music.sfx("select");
-        
-        TimeUnit.SECONDS.sleep(1);
-        
+
         //Transferring pokemon.txt data to playerstats Array
         try {
             for (int counter = 0; counter < 3; counter++) {
@@ -290,8 +271,6 @@ public class PokemonSimulator {
         for (int i = 0; i < 3; i++) {
             botstartinghp[i] = player2stats[i][2];
         }
-        
-        System.out.println(name+"'s Pokemon roster:\n");
 
         for (int i = 0; i < 3; i++) {
             System.out.println(pokename1[i]);
@@ -314,10 +293,9 @@ public class PokemonSimulator {
                 System.out.println(player1stats[i][j]);
             }
             System.out.println("");
-            TimeUnit.SECONDS.sleep(1);
         }
 
-        System.out.println("Prof. Tongkat Ali's Pokemon roster:\n");
+        System.out.println("");
 
         for (int i = 0; i < 3; i++) {
             System.out.println(pokename2[i]);
@@ -340,10 +318,7 @@ public class PokemonSimulator {
                 System.out.println(player2stats[i][j]);
             }
             System.out.println("");
-            TimeUnit.SECONDS.sleep(1);
         }
-        
-        TimeUnit.SECONDS.sleep(1);
 
         System.out.println("Looks like we are both set and ready to go, press ENTER to start!\n");
         input.nextLine();
@@ -395,19 +370,18 @@ public class PokemonSimulator {
         audio.battlemusic();
         TimeUnit.SECONDS.sleep(2);
         //weather generator
-        weather[0] = r.nextInt(3); //0=nice day, neutral, 1=sunny day, 2=rainy day
+        weather[0] = r.nextInt(4); //0=nice day, neutral, 1=sunny day, 2=rainy day
         switch (weather[0]) {
             case 0:
                 System.out.println("What a nice day, perfect for a Pokemon battle!");
-                music.sfx("nice");
                 break;
             case 1:
                 System.out.println("It's a sunny day! With this weather, keep yourselves hydrated.");
-                music.sfx("sunnyday");
                 break;
+            case 3:
+                System.out.println("It is damp today!I can feel the happiness of plants around!");
             default:
                 System.out.println("It's raining! Get shelter or you'll be soaking wet!");
-                music.sfx("rain");
         }
         TimeUnit.SECONDS.sleep(2);
 
@@ -533,7 +507,7 @@ public class PokemonSimulator {
         } while ((player1stats[pokeslot1][2] > 0) && (player2stats[pokeslot2][2] > 0));
     }
 
-    public static void Moveset(String pokename[], String[][] skill, int move, int pokeslot1, int pokeslot2, double[][] attackerstats, double[][] targetstats, double[] speed, double[] accuracy, int[] weather, boolean[] state1, boolean[] state2, boolean[] bot) throws InterruptedException {
+    public static void Moveset(String pokename[], String[][] skill, int move, int pokeslot1, int pokeslot2, double[][] attackerstats, double[][] targetstats, double[] speed, double[] accuracy, int[] weather, boolean[] state1, boolean[] state2, boolean[] bot) {
 
         if (bot[0] == true) {
             double temp1 = speed[0];
@@ -570,7 +544,7 @@ public class PokemonSimulator {
         System.out.println(pokename[0] + " used " + skill[pokeslot1][move] + "!");
         switch (skill[pokeslot1][move]) {
             case "Take Down":
-                dmg = damage(85 - accuracy[0], attackerstats[pokeslot1][0], 90, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1);
+                dmg = damage(85 - accuracy[0], attackerstats[pokeslot1][0], 90, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1,weather);
                 if (state1[3] == true) {
                     System.out.println(pokename[0] + " is confused!");
                     System.out.println("It hit itself in the confusion!");
@@ -579,7 +553,6 @@ public class PokemonSimulator {
                     break;
                 } else {
                     targetstats[pokeslot2][2] -= dmg;
-                    music.sfx("takedown");
                     rage(state2, targetstats, pokeslot2);
                 }
                 attackerstats[pokeslot1][2] -= dmg / 4;
@@ -588,7 +561,7 @@ public class PokemonSimulator {
                 break;
             case "Quick Attack":
                 speed[0] += 50;//If possible speed is applied before attack phase
-                dmg = damage(70 - accuracy[0], attackerstats[pokeslot1][0], 40, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1);
+                dmg = damage(70 - accuracy[0], attackerstats[pokeslot1][0], 40, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1,weather);
                 if (state1[3] == true) {
                     System.out.println(pokename[0] + " is confused!");
                     System.out.println("It hit itself in the confusion!");
@@ -603,9 +576,6 @@ public class PokemonSimulator {
                 break;
             case "Tail Whip":
                 targetstats[pokeslot2][1] -= 20;
-                music.sfx("tailwhip");
-                TimeUnit.SECONDS.sleep(1);
-                music.sfx("lowerstats");
                 System.out.println("Opponent's defense lowered!");
                 if (targetstats[pokeslot2][1] < 0)//Apply this to every stat!
                 {
@@ -615,12 +585,10 @@ public class PokemonSimulator {
             case "Sand Attack":
             case "Flash":
                 accuracy[1] -= 15;
-                System.out.println("Opponent's accuracy lowered!");
-                music.sfx("lowerstats");
                 break;
             case "Hyper Beam":
                 speed[0] -= 50;
-                dmg = damage(60 - accuracy[0], attackerstats[pokeslot1][0], 150, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1);
+                dmg = damage(60 - accuracy[0], attackerstats[pokeslot1][0], 150, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1, weather, weather);
                 if (state1[3] == true) {
                     System.out.println(pokename[0] + " is confused!");
                     System.out.println("It hit itself in the confusion!");
@@ -629,13 +597,12 @@ public class PokemonSimulator {
                     break;
                 } else {
                     targetstats[pokeslot2][2] -= dmg;
-                    music.sfx("hyperbeam");
                     rage(state2, targetstats, pokeslot2);
                 }
 
                 break;
             case "Mega Punch":
-                dmg = damage(85 - accuracy[0], attackerstats[pokeslot1][0], 80, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1);
+                dmg = damage(85 - accuracy[0], attackerstats[pokeslot1][0], 80, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1, weather);
                 if (state1[3] == true) {
                     System.out.println(pokename[0] + " is confused!");
                     System.out.println("It hit itself in the confusion!");
@@ -644,16 +611,12 @@ public class PokemonSimulator {
                     break;
                 } else {
                     targetstats[pokeslot2][2] -= dmg;
-                    music.sfx("firepunch");
                     rage(state2, targetstats, pokeslot2);
                 }
 
                 break;
             case "Rest":
                 speed[0] -= 200;
-                music.sfx("rest");
-                TimeUnit.SECONDS.sleep(1);
-                music.sfx("heal");
                 attackerstats[pokeslot1][2] += 20;//Only for Snorlax for now
                 if (attackerstats[pokeslot1][2] > 160) {
                     attackerstats[pokeslot1][2] = 160;
@@ -662,10 +625,9 @@ public class PokemonSimulator {
             case "Harden":
                 attackerstats[pokeslot1][1] += 15;
                 System.out.println(pokename[0] + "'s Defense increased!");
-                music.sfx("increasestats");
                 break;
             case "Tackle":
-                dmg = damage(70 - accuracy[0], attackerstats[pokeslot1][0], 40, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1);
+                dmg = damage(70 - accuracy[0], attackerstats[pokeslot1][0], 40, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1, weather);
                 if (state1[3] == true) {
                     System.out.println(pokename[0] + " is confused!");
                     System.out.println("It hit itself in the confusion!");
@@ -680,11 +642,9 @@ public class PokemonSimulator {
                 break;
             case "Recover":
                 attackerstats[pokeslot1][2] += 32.50;//Only for Porygon for now
-                music.sfx("heal");
                 break;
             case "Agility":
                 attackerstats[pokeslot1][3] += 15;
-                music.sfx("increasestats");
                 System.out.println(pokename[0] + "'s Agility increased!");
                 break;
             case "Leaf Storm":
@@ -725,10 +685,10 @@ public class PokemonSimulator {
                     break;
                 } else {
                     targetstats[pokeslot2][2] -= dmg;
-                    music.sfx("waterpulsegigadrain");
                     rage(state2, targetstats, pokeslot2);
                 }
                 attackerstats[pokeslot1][2] += dmg / 2;
+
                 break;
             case "Absorb":
                 dmg = damage(70 - accuracy[0], attackerstats[pokeslot1][0], 20, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 1, state1);
@@ -740,11 +700,11 @@ public class PokemonSimulator {
                     break;
                 } else {
                     targetstats[pokeslot2][2] -= dmg;
-                    attackerstats[pokeslot1][2] += dmg;//Doubled healing for balancing purposes
-                    System.out.printf("%s healed itself for %.2f damage!", pokename[0], dmg);
-                    music.sfx("heal");
                     rage(state2, targetstats, pokeslot2);
                 }
+                attackerstats[pokeslot1][2] += dmg;//Doubled healing for balancing purposes
+                System.out.printf("%s healed itself for %.2f damage!", pokename[0], dmg);
+
                 break;
             case "Razor Leaf":
                 dmg = damage(65 - accuracy[0], attackerstats[pokeslot1][0], 55, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 1, state1);
@@ -760,7 +720,7 @@ public class PokemonSimulator {
                 }
                 break;
             case "Bite":
-                dmg = damage(70 - accuracy[0], attackerstats[pokeslot1][0], 60, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1);
+                dmg = damage(70 - accuracy[0], attackerstats[pokeslot1][0], 60, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1, weather);
                 if (state1[3] == true) {
                     System.out.println(pokename[0] + " is confused!");
                     System.out.println("It hit itself in the confusion!");
@@ -790,11 +750,11 @@ public class PokemonSimulator {
                     targetstats[pokeslot2][2] -= dmg;
                     rage(state2, targetstats, pokeslot2);//Sure hit move unless airborne, underground etc.
                 }
+
                 break;
             case "Sunny Day":
                 weather[0] = 0;
                 System.out.println("The sunlight got bright!");
-                music.sfx("sunnyday");
                 break;
             case "Solar Beam":
                 if (state1[0] == true) {
@@ -808,7 +768,6 @@ public class PokemonSimulator {
                     } else {
                         targetstats[pokeslot2][2] -= dmg;
                         rage(state2, targetstats, pokeslot2);//Executes in one turn when sunny, else two turns.
-                        music.sfx("solarbeam");
                     }
                     skill[pokeslot1][move] = temp;
                     temp = "MissingNo.";
@@ -823,14 +782,12 @@ public class PokemonSimulator {
                         break;
                     } else {
                         targetstats[pokeslot2][2] -= dmg;
-                        music.sfx("solarbeam");
                         rage(state2, targetstats, pokeslot2);//Executes in one turn when sunny, else two turns.
                     }
 
                 } else {
                     state1[0] = true;
                     System.out.println(pokename[0] + " charges its solar attack!");
-                    music.sfx("solarbeam");
                 }
                 break;
             case "Seed Bomb":
@@ -845,6 +802,7 @@ public class PokemonSimulator {
                     targetstats[pokeslot2][2] -= dmg;
                     rage(state2, targetstats, pokeslot2);
                 }
+
                 break;
             case "Vine Whip":
                 dmg = damage(70 - accuracy[0], attackerstats[pokeslot1][0], 45, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 1, state1);
@@ -877,13 +835,11 @@ public class PokemonSimulator {
                 if (debuffacc >= 70) {
                     accuracy[1] -= 10;
                     System.out.println("Enemy's accuracy has been lowered!");
-                    music.sfx("lowerstats");
                 }
                 break;
             case "Growth":
                 attackerstats[pokeslot1][0] += 20;//Actually increases sp.attack as well
                 System.out.println(pokename[0] + "'s Attack increases!");
-                music.sfx("increasestats");
                 break;
             case "Ember":
                 dmg = damage(70 - accuracy[0], attackerstats[pokeslot1][0], 40, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 3, state1);
@@ -895,9 +851,9 @@ public class PokemonSimulator {
                     break;
                 } else {
                     targetstats[pokeslot2][2] -= dmg;
-                    music.sfx("ember");
                     rage(state2, targetstats, pokeslot2);
                 }
+
                 break;
             case "Flare Blitz":
                 dmg = damage(70 - accuracy[0], attackerstats[pokeslot1][0], 120, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 3, state1);
@@ -922,7 +878,7 @@ public class PokemonSimulator {
 
                 break;
             case "Scratch":
-                dmg = damage(70 - accuracy[0], attackerstats[pokeslot1][0], 40, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1);
+                dmg = damage(70 - accuracy[0], attackerstats[pokeslot1][0], 40, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1, weather);
                 if (state1[3] == true) {
                     System.out.println(pokename[0] + " is confused!");
                     System.out.println("It hit itself in the confusion!");
@@ -936,7 +892,7 @@ public class PokemonSimulator {
 
                 break;
             case "Slash":
-                dmg = damage(70 - accuracy[0], attackerstats[pokeslot1][0], 70, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1);
+                dmg = damage(70 - accuracy[0], attackerstats[pokeslot1][0], 70, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1, weather);
                 if (state1[3] == true) {
                     System.out.println(pokename[0] + " is confused!");
                     System.out.println("It hit itself in the confusion!");
@@ -945,12 +901,12 @@ public class PokemonSimulator {
                     break;
                 } else {
                     targetstats[pokeslot2][2] -= dmg;
-                    music.sfx("slash");
                     rage(state2, targetstats, pokeslot2);//Actually increases critical hit chance
                 }
+
                 break;
             case "Double-Edge":
-                dmg = damage(70 - accuracy[0], attackerstats[pokeslot1][0], 120, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1);
+                dmg = damage(70 - accuracy[0], attackerstats[pokeslot1][0], 120, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1, weather);
                 if (state1[3] == true) {
                     System.out.println(pokename[0] + " is confused!");
                     System.out.println("It hit itself in the confusion!");
@@ -963,6 +919,7 @@ public class PokemonSimulator {
                 }
                 attackerstats[pokeslot1][2] -= dmg / 3;
                 System.out.printf("%s hurt itself in the process with %.2f damage!\n", pokename[0], dmg / 3);
+
                 break;
             case "Blaze Kick":
                 dmg = damage(60 - accuracy[0], attackerstats[pokeslot1][0], 85, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 3, state1);
@@ -995,10 +952,9 @@ public class PokemonSimulator {
                 } else {
                     targetstats[pokeslot2][2] -= dmg;
                     rage(state2, targetstats, pokeslot2);
-                    attackerstats[pokeslot1][3] += 15;
-                    System.out.println(pokename[0]+"'s attack increased!");
-                    music.sfx("increasestats");
                 }
+
+                attackerstats[pokeslot1][3] += 15;
                 break;
             case "Fire Fang":
                 dmg = damage(65 - accuracy[0], attackerstats[pokeslot1][0], 65, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 3, state1);
@@ -1010,9 +966,9 @@ public class PokemonSimulator {
                     break;
                 } else {
                     targetstats[pokeslot2][2] -= dmg;
-                    music.sfx("firepunch");
                     rage(state2, targetstats, pokeslot2);
                 }
+
                 burn = r.nextInt(10001);
                 burn /= 100;
                 if (burn >= 90) {
@@ -1036,7 +992,6 @@ public class PokemonSimulator {
                     break;
                 } else {
                     targetstats[pokeslot2][2] -= dmg;
-                    music.sfx("bubblenbeam");
                     rage(state2, targetstats, pokeslot2);
                 }
 
@@ -1045,7 +1000,6 @@ public class PokemonSimulator {
                 if (debuffspd >= 90) {
                     targetstats[pokeslot2][3] -= 10;
                     System.out.println("Enemy's speed lowered!");
-                    music.sfx("lowerstats");
                 }
                 break;
             case "Water Gun":
@@ -1060,10 +1014,11 @@ public class PokemonSimulator {
                     targetstats[pokeslot2][2] -= dmg;
                     rage(state2, targetstats, pokeslot2);
                 }
+
                 break;
             case "Skull Bash":
                 if (state1[1] == true) {
-                    dmg = damage(70 - accuracy[0], attackerstats[pokeslot1][0], 120, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1);
+                    dmg = damage(70 - accuracy[0], attackerstats[pokeslot1][0], 120, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1, weather);
                     if (state1[3] == true) {
                         System.out.println(pokename[0] + " is confused!");
                         System.out.println("It hit itself in the confusion!");
@@ -1098,7 +1053,7 @@ public class PokemonSimulator {
 
                 break;
             case "Rage":
-                dmg = damage(70 - accuracy[0], attackerstats[pokeslot1][0], 20, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1);
+                dmg = damage(70 - accuracy[0], attackerstats[pokeslot1][0], 20, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1, weather);
                 if (state1[3] == true) {
                     System.out.println(pokename[0] + " is confused!");
                     System.out.println("It hit itself in the confusion!");
@@ -1115,7 +1070,6 @@ public class PokemonSimulator {
             case "Rain Dance":
                 weather[0] = 1;
                 System.out.println("It started to rain!");
-                music.sfx("raindance");
                 break;
             case "Water Pulse":
                 dmg = damage(70 - accuracy[0], attackerstats[pokeslot1][0], 60, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 2, state1);
@@ -1127,7 +1081,6 @@ public class PokemonSimulator {
                     break;
                 } else {
                     targetstats[pokeslot2][2] -= dmg;
-                    music.sfx("waterpulsegigadrain");
                     rage(state2, targetstats, pokeslot2);
                 }
 
@@ -1139,7 +1092,7 @@ public class PokemonSimulator {
                 }
                 break;
             case "Body Slam":
-                dmg = damage(70 - accuracy[0], attackerstats[pokeslot1][0], 60, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1);
+                dmg = damage(70 - accuracy[0], attackerstats[pokeslot1][0], 60, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1, weather);
                 if (state1[3] == true) {
                     System.out.println(pokename[0] + " is confused!");
                     System.out.println("It hit itself in the confusion!");
@@ -1150,6 +1103,7 @@ public class PokemonSimulator {
                     targetstats[pokeslot2][2] -= dmg;
                     rage(state2, targetstats, pokeslot2);
                 }
+
                 flinch = r.nextInt(10001);
                 flinch /= 100;
                 if (flinch >= 70) {
@@ -1167,7 +1121,6 @@ public class PokemonSimulator {
                     break;
                 } else {
                     targetstats[pokeslot2][2] -= dmg;
-                    music.sfx("flamethrower");
                     rage(state2, targetstats, pokeslot2);
                 }
                 burn = r.nextInt(10001);
@@ -1179,7 +1132,7 @@ public class PokemonSimulator {
 
                 break;
             case "Swift":
-                dmg = damage(100, attackerstats[pokeslot1][0], 60, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1);
+                dmg = damage(100, attackerstats[pokeslot1][0], 60, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1, weather);
                 if (state1[3] == true) {
                     System.out.println(pokename[0] + " is confused!");
                     System.out.println("It hit itself in the confusion!");
@@ -1190,6 +1143,7 @@ public class PokemonSimulator {
                     targetstats[pokeslot2][2] -= dmg;
                     rage(state2, targetstats, pokeslot2);
                 }
+
                 break;
             case "Aqua Tail":
                 dmg = damage(60 - accuracy[0], attackerstats[pokeslot1][0], 90, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 2, state1);
@@ -1203,9 +1157,10 @@ public class PokemonSimulator {
                     targetstats[pokeslot2][2] -= dmg;
                     rage(state2, targetstats, pokeslot2);
                 }
+
                 break;
             case "Cut":
-                dmg = damage(65 - accuracy[0], attackerstats[pokeslot1][0], 50, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1);
+                dmg = damage(65 - accuracy[0], attackerstats[pokeslot1][0], 50, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1, weather);
                 if (state1[3] == true) {
                     System.out.println(pokename[0] + " is confused!");
                     System.out.println("It hit itself in the confusion!");
@@ -1214,12 +1169,12 @@ public class PokemonSimulator {
                     break;
                 } else {
                     targetstats[pokeslot2][2] -= dmg;
-                    music.sfx("cut");
                     rage(state2, targetstats, pokeslot2);
                 }
+
                 break;
             case "Facade":
-                dmg = damage(70 - accuracy[0], attackerstats[pokeslot1][0], 70, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1);
+                dmg = damage(70 - accuracy[0], attackerstats[pokeslot1][0], 70, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1, weather);
                 if (state1[3] == true || state1[4] == true) {
                     targetstats[pokeslot2][2] -= 2 * dmg;
                 } else {
@@ -1229,7 +1184,7 @@ public class PokemonSimulator {
 
                 break;
             case "Pound":
-                dmg = damage(65 - accuracy[0], attackerstats[pokeslot1][0], 50, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1);
+                dmg = damage(65 - accuracy[0], attackerstats[pokeslot1][0], 50, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1, weather);
                 if (state1[3] == true) {
                     System.out.println(pokename[0] + " is confused!");
                     System.out.println("It hit itself in the confusion!");
@@ -1240,9 +1195,10 @@ public class PokemonSimulator {
                     targetstats[pokeslot2][2] -= dmg;
                     rage(state2, targetstats, pokeslot2);
                 }
+
                 break;
             case "Bubble":
-                dmg = damage(70 - accuracy[0], attackerstats[pokeslot1][0], 40, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1);
+                dmg = damage(70 - accuracy[0], attackerstats[pokeslot1][0], 40, targetstats[pokeslot2][1], targetstats[pokeslot2][4], 0, state1, weather);
                 if (state1[3] == true) {
                     System.out.println(pokename[0] + " is confused!");
                     System.out.println("It hit itself in the confusion!");
@@ -1251,9 +1207,9 @@ public class PokemonSimulator {
                     break;
                 } else {
                     targetstats[pokeslot2][2] -= dmg;
-                    music.sfx("bubblenbeam");
                     rage(state2, targetstats, pokeslot2);
                 }
+
 
                 break;
         }
@@ -1276,7 +1232,7 @@ public class PokemonSimulator {
         }
     }
 
-    public static double damage(double accuracy, double attack, double power, double defense, double type_enemy, int type, boolean[] state) {
+    public static double damage(double accuracy, double attack, double power, double defense, double type_enemy, int type, boolean[] state,int weather) {
 //0 normal, 1 grass, 2 water, 3 fire
         Random r = new Random();
         double hit = r.nextInt(10001);
@@ -1285,40 +1241,60 @@ public class PokemonSimulator {
             if (type_enemy == 1 && type == 3) //fire attack grass
             {
                 System.out.println("It's super effective!");
-                music.sfx("supereffective");
-                return (((attack * power / defense) / 20) + 2) * 2;
+                if (weather==0)
+                    return (((attack * power / defense) / 20) + 2) * 2 * 1.5;
+                else if (weather==1)
+                    return (((attack * power / defense) / 20) + 2);
+                else
+                    return (((attack * power / defense) / 20) + 2) * 2;
             } else if (type_enemy == 2 && type == 3) //fire attack water
             {
                 System.out.println("It's not very effective....");
-                music.sfx("notveryeffective");
-                return (((attack * power / defense) / 20) + 2) / 2;
+                if (weather==0)
+                    return (((attack * power / defense) / 20) + 2) / 2 * 1.5;
+                else if (weather==1)
+                    return (((attack * power / defense) / 20) + 2) / 2 / 2;
+                else
+                    return (((attack * power / defense) / 20) + 2) / 2;
             } else if (type_enemy == 3 && type == 1) //grass attack fire
             {
                 System.out.println("It's not very effective...");
-                music.sfx("notveryeffective");
-                return (((attack * power / defense) / 20) + 2) / 2;
+                if (weather==3)
+                    return (((attack * power / defense) / 20) + 2) / 2 * 1.25;
+                else
+                    return (((attack * power / defense) / 20) + 2) / 2;
             } else if (type_enemy == 2 && type == 1) //grass attack water
             {
                 System.out.println("It's super effective!");
-                music.sfx("supereffective");
-                return (((attack * power / defense) / 20) + 2) * 2;
+                if (weather==3)
+                    return (((attack * power / defense) / 20) + 2) * 2 * 1.25;
+                else
+                    return (((attack * power / defense) / 20) + 2) * 2;
             } else if (type_enemy == 3 && type == 2) //water attack fire
             {
                 System.out.println("It's super effective");
-                music.sfx("supereffective");
-                return (((attack * power / defense) / 20) + 2) * 2;
+                if (weather==1)
+                    return (((attack * power / defense) / 20) + 2) * 2 * 1.5;
+                else if (weather==0)
+                    return (((attack * power / defense) / 20) + 2);
+                else
+                    return (((attack * power / defense) / 20) + 2) * 2;
             } else if (type_enemy == 1 && type == 2) //water attack grass
             {
                 System.out.println("It's not very effective...");
-                music.sfx("notveryeffective");
-                return (((attack * power / defense) / 20) + 2) / 2;
-            } else {
-                music.sfx("normalhit");
+                if (weather==1)
+                    return (((attack * power / defense) / 20) + 2) / 2 * 1.5;
+                else if (weather==0)
+                    return (((attack * power / defense) / 20) + 2) / 2 / 2;
+                else
+                    return (((attack * power / defense) / 20) + 2) / 2;
+            } else if ((type==3 && weather==3)||(type==2&&weather==1)||(type==1&&weather==0))
+                return (((attack * power / defense) / 20) + 2) * 1.25;
+              else {
                 return (((attack * power / defense) / 20) + 2);
             }
         } else {
             System.out.println("But it missed!");
-            music.sfx("miss");
             return 0;
         }
     }
@@ -1344,7 +1320,6 @@ public class PokemonSimulator {
             }
         } while (true);
         System.out.println("You have chosen " + pokename1[select] + "!");
-        music.sfx("switch");
         temp = pokename1[select];
         pokename1[select] = pokename1[0];
         pokename1[0] = temp;
@@ -1407,7 +1382,6 @@ public class PokemonSimulator {
         } while (true);
 
         System.out.println("I switch my Pokemon, " + pokename[select] + ", I choose you!");
-        music.sfx("switch");
         temp = pokename[select];
         pokename[select] = pokename[0];
         pokename[0] = temp;
